@@ -180,7 +180,7 @@ jobs:
       - name: Build Isar Core
         run: |
           bash tool/build_ios.sh
-          unzip isar_ios.xcframework.zip -d packages/isar_flutter_libs/ios
+          unzip isar_ios.xcframework.zip -d packages/isar_community_flutter_libs/ios
       - name: Prepare Tests
         run: sh tool/prepare_tests.sh
       - name: Run Flutter Integration tests
@@ -204,8 +204,8 @@ jobs:
       - name: Build Isar Core
         run: |
           bash tool/build_android.sh x64
-          mkdir -p packages/isar_flutter_libs/android/src/main/jniLibs/x86_64
-          mv libisar_android_x64.so packages/isar_flutter_libs/android/src/main/jniLibs/x86_64/libisar.so
+          mkdir -p packages/isar_community_flutter_libs/android/src/main/jniLibs/x86_64
+          mv libisar_android_x64.so packages/isar_community_flutter_libs/android/src/main/jniLibs/x86_64/libisar.so
       - name: Prepare Tests
         run: sh tool/prepare_tests.sh
       - name: Run Flutter Integration tests
@@ -236,7 +236,7 @@ jobs:
         run: |
           bash tool/build_macos.sh
           install_name_tool -id @rpath/libisar.dylib libisar_macos.dylib
-          mv libisar_macos.dylib packages/isar_flutter_libs/macos/libisar.dylib
+          mv libisar_macos.dylib packages/isar_community_flutter_libs/macos/libisar.dylib
       - name: Prepare Tests
         run: sh tool/prepare_tests.sh
       - name: Run Flutter Driver tests
@@ -260,11 +260,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev
       - name: Setup headless display
-        uses: pyvista/setup-headless-display-action@v1
+        uses: pyvista/setup-headless-display-action@v3
       - name: Build Isar Core
         run: |
           bash tool/build_linux.sh x64
-          mv libisar_linux_x64.so packages/isar_flutter_libs/linux/libisar.so
+          mv libisar_linux_x64.so packages/isar_community_flutter_libs/linux/libisar.so
       - name: Prepare Tests
         run: sh tool/prepare_tests.sh
       - name: Run Flutter Driver tests
@@ -287,7 +287,7 @@ jobs:
       - name: Build Isar Core
         run: |
           bash tool/build_windows.sh x64
-          mv isar_windows_x64.dll packages/isar_flutter_libs/windows/libisar.dll
+          mv isar_windows_x64.dll packages/isar_community_flutter_libs/windows/libisar.dll
       - name: Prepare Tests
         run: sh tool/prepare_tests.sh
       - name: Run Flutter Driver tests
