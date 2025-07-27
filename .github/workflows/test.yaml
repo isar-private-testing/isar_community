@@ -35,7 +35,7 @@ jobs:
   lint:
     name: Check lints
     runs-on: ubuntu-24.04
-    if: ${{ false }}
+    # if: ${{ false }}
     steps:
       - uses: actions/checkout@v4
       - name: Setup Flutter
@@ -64,7 +64,7 @@ jobs:
     name: Dart Test
     strategy:
       matrix:
-        os: [macos-14, ubuntu-24.04]
+        os: [macos-14, ubuntu-24.04, windows-2022]
       fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
@@ -276,7 +276,7 @@ jobs:
   integration_test_windows:
     name: Integration Test Windows
     runs-on: windows-2022
-    if: ${{ false }}
+    # if: ${{ false }}
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
