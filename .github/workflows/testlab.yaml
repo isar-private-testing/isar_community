@@ -46,4 +46,4 @@ jobs:
             --device model=tokay,version=35 \
             --app build/app/outputs/apk/debug/app-debug.apk \
             --test build/app/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-        working-directory: packages/isar_test/android
+        working-directory: packages/isar_test
