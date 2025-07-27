@@ -130,6 +130,7 @@ fn main() {
             dst.join("lib").display()
         );
         println!(r"cargo:rustc-link-lib=ntdll");
+        println!(r"cargo:rustc-link-lib=advapi32");
         println!(r"cargo:rustc-link-search=C:\windows\system32");
     } else {
         cc_builder
