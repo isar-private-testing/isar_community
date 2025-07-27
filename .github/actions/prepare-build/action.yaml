@@ -3,27 +3,16 @@ description: "Prepares the build for Isar Core"
 runs:
   using: "composite"
   steps:
-    - name: Install latest Rust Nightly
-      uses: dtolnay/rust-toolchain@stable
-      with:
-        toolchain: nightly
-        components: rustfmt, clippy
-    - name: Install Perl
+    - name: Install LLVM and Clang
       if: runner.os == 'Windows'
-      uses: shogo82148/actions-setup-perl@v1
+      uses: KyleMayes/install-llvm-action@v1
       with:
-        distribution: strawberry
-        perl-version: "5.32"
-    - name: Install make with Chocolatey
+        version: "11.0"
+        directory: ${{ runner.temp }}/llvm
+    - name: Set LIBCLANG_PATH
       if: runner.os == 'Windows'
       shell: bash
-      run: choco install make
-    - name: Set Windows environment variables
-      if: runner.os == 'Windows'
-      shell: pwsh
-      run: |
-        echo "LIBCLANG_PATH=$((gcm clang).source -replace "clang.exe")" >> $env:GITHUB_ENV
-        echo "OPENSSL_SRC_PERL=C:/Strawberry/perl/bin/perl" >> $env:GITHUB_ENV
+      run: echo "LIBCLANG_PATH=$((gcm clang).source -replace "clang.exe")" >> $env:GITHUB_ENV
     # See https://github.com/godot-rust/godot-rust/pull/920
     - name: "Workaround Android NDK due to Rust bug"
       if: runner.os == 'Linux' || runner.os == 'macOS'
