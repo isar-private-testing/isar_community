@@ -22,7 +22,7 @@ jobs:
         run: |
           flutter pub get
           dart tool/verify_release_version.dart ${{ github.ref_name }}
-        working-directory: packages/isar
+        working-directory: packages/isar_community
 
   build_binaries:
     name: Build Binaries
@@ -93,15 +93,15 @@ jobs:
           flutter-version: ${{ vars.FLUTTER_VERSION }}
       - name: Build
         run: flutter build web --base-href /${{ github.ref_name }}/
-        working-directory: packages/isar_inspector
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: packages/isar_inspector/build/web
-          repository-name: isar-community/inspector
-          token: ${{ secrets.TOKEN }}
-          target-folder: ${{ github.ref_name }}
-          clean: false
+        working-directory: packages/isar_community_inspector
+      # - name: Deploy to GitHub Pages
+      #   uses: JamesIves/github-pages-deploy-action@v4
+      #   with:
+      #     folder: packages/isar_community_inspector/build/web
+      #     repository-name: isar-community/inspector
+      #     token: ${{ secrets.TOKEN }}
+      #     target-folder: ${{ github.ref_name }}
+      #     clean: false
 
   # upload_to_repo:
   #   needs: build_binaries
