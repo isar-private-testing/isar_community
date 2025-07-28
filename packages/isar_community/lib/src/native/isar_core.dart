@@ -208,7 +208,7 @@ extension on Abi {
         return 'libisar.so';
       case Abi.windowsArm64:
       case Abi.windowsX64:
-        return 'isar.dll';
+        return 'libisar.dll';
       default:
         throw IsarError(
           'Unsupported processor architecture "${Abi.current()}". '
