@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version=`dart packages/isar/tool/get_version.dart`
+version=`dart packages/isar_community/tool/get_version.dart`
 binariesUrl="https://binaries.isar-community.dev/$ISAR_VERSION"
 
 

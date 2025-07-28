@@ -143,11 +143,11 @@ jobs:
       - name: Upload isar Coverage
         uses: codecov/codecov-action@v3
         with:
-          files: packages/isar/lcov_isar.info
+          files: packages/isar_community/lcov_isar.info
       - name: Upload isar_test Coverage
         uses: codecov/codecov-action@v3
         with:
-          files: packages/isar/lcov_isar_test.info
+          files: packages/isar_community/lcov_isar_test.info
 
   test_generator:
     name: Generator Test

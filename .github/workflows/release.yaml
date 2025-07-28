@@ -147,7 +147,7 @@ jobs:
   #     - uses: subosito/flutter-action@v2
   #     - name: pub get
   #       run: dart pub get
-  #       working-directory: packages/isar
+  #       working-directory: packages/isar_community
   #     - name: Download Binaries
   #       run: sh tool/download_binaries.sh
   #     - name: pub.dev credentials
@@ -156,10 +156,10 @@ jobs:
   #         echo '${{ secrets.PUB_JSON }}' >> $HOME/.config/dart/pub-credentials.json
   #     - name: Publish isar
   #       run: dart pub publish --force
-  #       working-directory: packages/isar
+  #       working-directory: packages/isar_community
   #     - name: Publish isar_generator
   #       run: dart pub publish --force
-  #       working-directory: packages/isar_generator
+  #       working-directory: packages/isar_community_generator
   #     - name: Publish isar_community_flutter_libs
   #       run: dart pub publish --force
   #       working-directory: packages/isar_community_flutter_libs
