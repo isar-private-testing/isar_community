@@ -8,7 +8,7 @@ Future<void> init() async {
   if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
     final rootDir = path.dirname(path.dirname(Directory.current.path));
     final binaryName = Platform.isWindows
-        ? 'libisar.dll'
+        ? 'isar.dll'
         : Platform.isMacOS
             ? 'libisar.dylib'
             : 'libisar.so';
