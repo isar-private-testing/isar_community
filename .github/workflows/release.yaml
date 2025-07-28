@@ -46,7 +46,7 @@ jobs:
           - os: macos-14
             artifact_name: isar_ios.xcframework.zip
             script: build_ios.sh
-          - os: ubuntu-20.04
+          - os: ubuntu-24.04
             artifact_name: libisar_linux_x64.so
             script: build_linux.sh x64
           - os: macos-14
