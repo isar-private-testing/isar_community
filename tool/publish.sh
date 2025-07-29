@@ -6,18 +6,18 @@
 #
 
 set -o errexit
-pushd packages/isar
+pushd packages/isar_community
 dart pub get
 popd
 sh tool/download_binaries.sh
 #dart pub token add --env-var=PUB_JSON https://pub.isar-community.dev/
-pushd packages/isar
+pushd packages/isar_community
 dart pub publish --force
 popd
-pushd packages/isar_generator
+pushd packages/isar_community_generator
 dart pub publish --force
 popd
-pushd packages/isar_flutter_libs
+pushd packages/isar_community_flutter_libs
 dart pub publish --force
 popd
 

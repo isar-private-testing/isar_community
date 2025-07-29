@@ -135,6 +135,8 @@ fn main() {
             .define("UNICODE", "1")
             .define("HAVE_LIBM", "1")
             .define("NDEBUG", "1")
+            .define("CMAKE_EXE_LINKER_FLAGS", "/DEFAULTLIB:advapi32.lib")
+            .define("CMAKE_SHARED_LINKER_FLAGS", "/DEFAULTLIB:advapi32.lib")
             .cflag("/w")
             .init_c_cfg(cc_builder)
             .build();
@@ -145,6 +147,9 @@ fn main() {
             dst.join("lib").display()
         );
         println!(r"cargo:rustc-link-lib=ntdll");
+        println!(r"cargo:rustc-link-lib=advapi32");
+        println!(r"cargo:rustc-link-lib=user32");
+        println!(r"cargo:rustc-link-lib=kernel32");
         println!(r"cargo:rustc-link-search=C:\windows\system32");
     } else {
         cc_builder
