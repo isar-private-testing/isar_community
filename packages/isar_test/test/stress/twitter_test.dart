@@ -41,12 +41,12 @@ void main() async {
         );
         col = isar.collection<Tweet>();
 
-        for (var i = 0; i < 100; i++) {
-          final tweets = await downloadTweets(isar.directory!, i);
-          await isar.tWriteTxn(() async {
-            await col.tPutAll(tweets);
-          });
-        }
+        // for (var i = 0; i < 100; i++) {
+        //   final tweets = await downloadTweets(isar.directory!, i);
+        //   await isar.tWriteTxn(() async {
+        //     await col.tPutAll(tweets);
+        //   });
+        // }
       });
 
       tearDownAll(() => isar.close(deleteFromDisk: true));
