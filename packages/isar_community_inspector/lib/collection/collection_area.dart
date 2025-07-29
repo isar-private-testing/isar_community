@@ -9,13 +9,13 @@ import 'package:clickup_fading_scroll/clickup_fading_scroll.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:isar_community/isar.dart';
-import 'package:isar_inspector/collection/button_prev_next.dart';
-import 'package:isar_inspector/collection/button_sort.dart';
-import 'package:isar_inspector/collection/objects_list_sliver.dart';
-import 'package:isar_inspector/connect_client.dart';
-import 'package:isar_inspector/object/isar_object.dart';
-import 'package:isar_inspector/query_builder/query_group.dart';
-import 'package:isar_inspector/util.dart';
+import 'package:isar_community_inspector/collection/button_prev_next.dart';
+import 'package:isar_community_inspector/collection/button_sort.dart';
+import 'package:isar_community_inspector/collection/objects_list_sliver.dart';
+import 'package:isar_community_inspector/connect_client.dart';
+import 'package:isar_community_inspector/object/isar_object.dart';
+import 'package:isar_community_inspector/query_builder/query_group.dart';
+import 'package:isar_community_inspector/util.dart';
 
 const objectsPerPage = 20;
 

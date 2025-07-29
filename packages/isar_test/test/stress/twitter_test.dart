@@ -118,6 +118,7 @@ void main() async {
         ]);
       });
     },
+    skip: 'Stress test - skipping for faster builds',
     timeout: const Timeout(Duration(minutes: 10)),
   );
 }

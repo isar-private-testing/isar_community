@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:isar_community/isar.dart';
-import 'package:isar_inspector/connect_client.dart';
-import 'package:isar_inspector/connected_layout.dart';
-import 'package:isar_inspector/error_screen.dart';
+import 'package:isar_community_inspector/connect_client.dart';
+import 'package:isar_community_inspector/connected_layout.dart';
+import 'package:isar_community_inspector/error_screen.dart';
 
 class ConnectionScreen extends StatefulWidget {
   const ConnectionScreen({

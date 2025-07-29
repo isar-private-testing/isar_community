@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:isar_community/isar.dart';
-import 'package:isar_inspector/object/property_value.dart';
-import 'package:isar_inspector/util.dart';
+import 'package:isar_community_inspector/object/property_value.dart';
+import 'package:isar_community_inspector/util.dart';
 
 class QueryFilter extends StatelessWidget {
   const QueryFilter({

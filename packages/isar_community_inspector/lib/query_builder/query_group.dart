@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:isar_community/isar.dart';
-import 'package:isar_inspector/query_builder/query_filter.dart';
+import 'package:isar_community_inspector/query_builder/query_filter.dart';
 
 class QueryGroup extends StatelessWidget {
   const QueryGroup({
