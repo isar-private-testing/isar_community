@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - v3
+      - source_gen
   pull_request:
     branches:
       - v3
