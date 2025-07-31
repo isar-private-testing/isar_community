@@ -1,14 +1,20 @@
 import 'package:isar_community/isar.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 
 part 'geo.g.dart';
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
+@MappableClass()
 @embedded
-class Place {
-  Place();
-
-  factory Place.fromJson(Map<String, dynamic> json) => _$PlaceFromJson(json);
+class Place with PlaceMappable {
+  Place({
+    this.id,
+    this.url,
+    this.placeType,
+    this.name,
+    this.fullName,
+    this.countryCode,
+    this.country,
+  });
 
   String? id;
 
@@ -34,13 +40,13 @@ enum PlaceType {
   neighborhood;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
+@MappableClass()
 @embedded
-class Coordinates {
-  Coordinates();
-
-  factory Coordinates.fromJson(Map<String, dynamic> json) =>
-      _$CoordinatesFromJson(json);
+class Coordinates with CoordinatesMappable {
+  Coordinates({
+    this.coordinates,
+    this.type,
+  });
 
   List<double>? coordinates;
 

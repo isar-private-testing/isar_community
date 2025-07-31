@@ -1,14 +1,25 @@
 import 'package:isar_community/isar.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 
 part 'media.g.dart';
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
+@MappableClass()
 @embedded
-class Media {
-  Media();
-
-  factory Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
+class Media with MediaMappable {
+  Media({
+    this.displayUrl,
+    this.expandedUrl,
+    this.idStr,
+    this.indices,
+    this.mediaUrl,
+    this.mediaUrlHttps,
+    this.sizes,
+    this.sourceStatusIdStr,
+    this.type,
+    this.url,
+    this.videoInfo,
+    this.additionalMediaInfo,
+  });
 
   String? displayUrl;
 
@@ -35,12 +46,15 @@ class Media {
   AdditionalMediaInfo? additionalMediaInfo;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
+@MappableClass()
 @embedded
-class Sizes {
-  Sizes();
-
-  factory Sizes.fromJson(Map<String, dynamic> json) => _$SizesFromJson(json);
+class Sizes with SizesMappable {
+  Sizes({
+    this.thumb,
+    this.medium,
+    this.small,
+    this.large,
+  });
 
   Size? thumb;
 
@@ -51,12 +65,14 @@ class Sizes {
   Size? large;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
+@MappableClass()
 @embedded
-class Size {
-  Size();
-
-  factory Size.fromJson(Map<String, dynamic> json) => _$SizeFromJson(json);
+class Size with SizeMappable {
+  Size({
+    this.w,
+    this.h,
+    this.resize,
+  });
 
   int? w;
 
@@ -65,13 +81,15 @@ class Size {
   String? resize;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
+@MappableClass()
 @embedded
-class AdditionalMediaInfo {
-  AdditionalMediaInfo();
-
-  factory AdditionalMediaInfo.fromJson(Map<String, dynamic> json) =>
-      _$AdditionalMediaInfoFromJson(json);
+class AdditionalMediaInfo with AdditionalMediaInfoMappable {
+  AdditionalMediaInfo({
+    this.title,
+    this.description,
+    this.embeddable,
+    this.monetizable,
+  });
 
   String? title;
 
@@ -82,13 +100,14 @@ class AdditionalMediaInfo {
   bool? monetizable;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
+@MappableClass()
 @embedded
-class VideoInfo {
-  VideoInfo();
-
-  factory VideoInfo.fromJson(Map<String, dynamic> json) =>
-      _$VideoInfoFromJson(json);
+class VideoInfo with VideoInfoMappable {
+  VideoInfo({
+    this.aspectRatio,
+    this.durationMillis,
+    this.variants,
+  });
 
   List<int>? aspectRatio;
 
@@ -97,13 +116,14 @@ class VideoInfo {
   List<Variant>? variants;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
+@MappableClass()
 @embedded
-class Variant {
-  Variant();
-
-  factory Variant.fromJson(Map<String, dynamic> json) =>
-      _$VariantFromJson(json);
+class Variant with VariantMappable {
+  Variant({
+    this.bitrate,
+    this.contentType,
+    this.url,
+  });
 
   int? bitrate;
 

@@ -17,7 +17,7 @@ dependencies:
     path: ../isar_community
   isar_community_flutter_libs:
     path: ../isar_community_flutter_libs
-  json_annotation: ^4.7.0
+  dart_mappable: any
   meta: ^1.8.0
   path: ^1.8.2
   path_provider: ^2.0.10
@@ -30,7 +30,6 @@ dev_dependencies:
     sdk: flutter
   isar_community_generator:
     path: ../isar_community_generator
-  dart_mappable: any
   very_good_analysis: ^3.0.1
 
 dependency_overrides:

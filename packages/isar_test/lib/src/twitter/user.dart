@@ -1,16 +1,36 @@
 import 'package:isar_community/isar.dart';
 import 'package:isar_test/src/twitter/entities.dart';
 import 'package:isar_test/src/twitter/util.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 
 part 'user.g.dart';
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
+@MappableClass()
 @embedded
-class User {
-  User();
-
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+class User with UserMappable {
+  User({
+    this.idStr,
+    this.name,
+    this.screenName,
+    this.location,
+    this.url,
+    this.entities,
+    this.description,
+    this.protected,
+    this.verified,
+    this.followersCount,
+    this.friendsCount,
+    this.listedCount,
+    this.favoritesCount,
+    this.statusesCount,
+    this.createdAt,
+    this.profileBannerUrl,
+    this.profileImageUrlHttps,
+    this.defaultProfile,
+    this.defaultProfileImage,
+    this.withheldInCountries,
+    this.withheldScope,
+  });
 
   String? idStr;
 
@@ -40,7 +60,7 @@ class User {
 
   int? statusesCount;
 
-  @JsonKey(fromJson: convertTwitterDateTime)
+  @MappableField(hook: DateTimeFromStringHook())
   DateTime? createdAt;
 
   String? profileBannerUrl;
@@ -56,26 +76,25 @@ class User {
   String? withheldScope;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
+@MappableClass()
 @embedded
-class UserEntities {
-  UserEntities();
-
-  factory UserEntities.fromJson(Map<String, dynamic> json) =>
-      _$UserEntitiesFromJson(json);
+class UserEntities with UserEntitiesMappable {
+  UserEntities({
+    this.url,
+    this.description,
+  });
 
   UserEntityUrl? url;
 
   UserEntityUrl? description;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
+@MappableClass()
 @embedded
-class UserEntityUrl {
-  UserEntityUrl();
-
-  factory UserEntityUrl.fromJson(Map<String, dynamic> json) =>
-      _$UserEntityUrlFromJson(json);
+class UserEntityUrl with UserEntityUrlMappable {
+  UserEntityUrl({
+    this.urls,
+  });
 
   List<Url>? urls;
 }
