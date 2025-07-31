@@ -2,35 +2,32 @@
 
 <p align="center">
   <a href="https://isar-community.dev">
-    <img src="https://raw.githubusercontent.com/isar/isar/main/.github/assets/isar.svg?sanitize=true" height="128">
+    <img src="https://raw.githubusercontent.com/isar-community/isar-community/v3/.github/assets/isar.svg?sanitize=true" height="128">
   </a>
   <h1 align="center">Isar Database</h1>
 </p>
 
 <p align="center">
-  <a href="https://pub.dev/packages/isar">
-    <img src="https://img.shields.io/pub/v/isar?label=pub.dev&labelColor=333940&logo=dart">
+  <a href="https://pub.dev/packages/isar-community">
+    <img src="https://img.shields.io/pub/v/isar-community?label=pub.dev&labelColor=333940&logo=dart">
   </a>
-  <a href="https://github.com/isar-community/isar/actions/workflows/test.yaml">
-    <img src="https://img.shields.io/github/actions/workflow/status/isar/isar/test.yaml?branch=main&label=tests&labelColor=333940&logo=github">
+  <a href="https://github.com/isar-community/isar-community/actions/workflows/test.yaml">
+    <img src="https://img.shields.io/github/actions/workflow/status/isar-community/isar-community/test.yaml?branch=v3&label=tests&labelColor=333940&logo=github">
   </a>
-  <a href="https://app.codecov.io/gh/isar/isar">
-    <img src="https://img.shields.io/codecov/c/github/isar/isar?logo=codecov&logoColor=fff&labelColor=333940">
+  <a href="https://app.codecov.io/gh/isar-community/isar-community">
+    <img src="https://img.shields.io/codecov/c/github/isar-community/isar-community?logo=codecov&logoColor=fff&labelColor=333940">
   </a>
   <a href="https://t.me/isardb">
     <img src="https://img.shields.io/static/v1?label=join&message=isardb&labelColor=333940&logo=telegram&logoColor=white&color=229ED9">
-  </a>
-  <a href="https://twitter.com/simonleier">
-    <img src="https://img.shields.io/twitter/follow/simcdev?style=social">
   </a>
 </p>
 
 <p align="center">
   <a href="https://isar-community.dev">Quickstart</a> •
   <a href="https://isar-community.dev/schema">Documentation</a> •
-  <a href="https://github.com/isar-community/isar/tree/main/examples/">Sample Apps</a> •
-  <a href="https://github.com/isar-community/isar/discussions">Support & Ideas</a> •
-  <a href="https://pub.dev/packages/isar">Pub.dev</a>
+  <a href="https://github.com/isar-community/isar-community/tree/v3/examples/">Sample Apps</a> •
+  <a href="https://github.com/isar-community/isar-community/discussions">Support & Ideas</a> •
+  <a href="https://pub.dev/packages/isar-community">Pub.dev</a>
 </p>
 
 > #### Isar [ee-zahr]:
