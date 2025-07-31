@@ -30,7 +30,7 @@ dev_dependencies:
     sdk: flutter
   isar_community_generator:
     path: ../isar_community_generator
-  json_serializable: ^6.3.1
+  dart_mappable: any
   very_good_analysis: ^3.0.1
 
 dependency_overrides:
