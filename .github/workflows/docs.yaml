@@ -36,28 +36,9 @@ jobs:
           npm run build
           mv ./docs/.vuepress/dist ../../v3-docs
 
-      - name: Checkout main branch
-        uses: actions/checkout@v4
-        with:
-          ref: "main"
-          path: "main"
-
-      - name: Build main docs
-        run: |
-          cd main
-          git fetch --tags
-          tool/replace-versions.sh
-          cd docs
-          sed -i'.bak' "s|base:.*|base: '/',|" docs/.vuepress/config.ts
-          sed -i 's|text: "vx.x"|text: "v4.x"|' docs/.vuepress/config.ts  
-          npm ci
-          npm run build
-          mv ./docs/.vuepress/dist ../../main-docs
-
       - name: Prepare deployment directory
         run: |
           mkdir deploy
-          mv main-docs/* deploy/
           mkdir deploy/v3
           mv v3-docs/* deploy/v3/
 
