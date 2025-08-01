@@ -1,7 +1,6 @@
 import 'package:isar_community/isar.dart';
 import 'package:dart_mappable/dart_mappable.dart';
 
-part 'geo.g.dart';
 part 'geo.mapper.dart';
 
 @MappableClass()
