@@ -6,7 +6,7 @@ import 'package:isar_test/src/twitter/user.dart';
 import 'package:isar_test/src/twitter/util.dart';
 import 'package:dart_mappable/dart_mappable.dart';
 
-part 'tweet.g.dart';
+part 'tweet.mapper.dart';
 
 @MappableClass()
 @collection

@@ -4,7 +4,7 @@ import 'package:pub_app/models/api/package.dart';
 import 'package:pubspec/pubspec.dart';
 import 'package:dart_mappable/dart_mappable.dart';
 
-part 'package.g.dart';
+part 'package.mapper.dart';
 
 @MappableClass()
 @collection
