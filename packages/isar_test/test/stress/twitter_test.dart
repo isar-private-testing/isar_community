@@ -23,7 +23,7 @@ Future<List<Tweet>> downloadTweets(String dir, int index) async {
   }
 
   final json = jsonDecode(jsonStr) as List<dynamic>;
-  return json.map((e) => Tweet.fromJson(e as Map<String, dynamic>)).toList();
+  return json.map((e) => TweetMapper.fromJson(e as Map<String, dynamic>)).toList();
 }
 
 void main() async {

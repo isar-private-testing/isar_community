@@ -1,11 +1,12 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:isar_community/isar.dart';
 import 'package:isar_test/src/twitter/entities.dart';
 import 'package:isar_test/src/twitter/geo.dart';
 import 'package:isar_test/src/twitter/media.dart';
 import 'package:isar_test/src/twitter/user.dart';
 import 'package:isar_test/src/twitter/util.dart';
-import 'package:dart_mappable/dart_mappable.dart';
 
+part 'tweet.g.dart';
 part 'tweet.mapper.dart';
 
 @MappableClass()

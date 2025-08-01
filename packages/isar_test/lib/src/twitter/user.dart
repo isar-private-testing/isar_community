@@ -3,6 +3,7 @@ import 'package:isar_test/src/twitter/entities.dart';
 import 'package:isar_test/src/twitter/util.dart';
 import 'package:dart_mappable/dart_mappable.dart';
 
+part 'user.g.dart';
 part 'user.mapper.dart';
 
 @MappableClass()

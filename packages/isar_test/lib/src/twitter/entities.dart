@@ -1,9 +1,7 @@
 import 'package:isar_community/isar.dart';
 import 'package:dart_mappable/dart_mappable.dart';
 
-import 'media.dart';
-import 'util.dart';
-
+part 'entities.g.dart';
 part 'entities.mapper.dart';
 
 @MappableClass()

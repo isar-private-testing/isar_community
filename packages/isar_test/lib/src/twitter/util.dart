@@ -1,5 +1,5 @@
-import 'package:intl/intl.dart';
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:intl/intl.dart';
 
 DateTime? convertTwitterDateTime(String? twitterDateString) {
   if (twitterDateString == null) {
