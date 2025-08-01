@@ -1,14 +1,23 @@
 import 'package:isar_community/isar.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'media.g.dart';
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
 @embedded
 class Media {
-  Media();
-
-  factory Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
+  Media({
+    this.displayUrl,
+    this.expandedUrl,
+    this.idStr,
+    this.indices,
+    this.mediaUrl,
+    this.mediaUrlHttps,
+    this.sizes,
+    this.sourceStatusIdStr,
+    this.type,
+    this.url,
+    this.videoInfo,
+    this.additionalMediaInfo,
+  });
 
   String? displayUrl;
 
@@ -35,12 +44,14 @@ class Media {
   AdditionalMediaInfo? additionalMediaInfo;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
 @embedded
 class Sizes {
-  Sizes();
-
-  factory Sizes.fromJson(Map<String, dynamic> json) => _$SizesFromJson(json);
+  Sizes({
+    this.thumb,
+    this.medium,
+    this.small,
+    this.large,
+  });
 
   Size? thumb;
 
@@ -51,12 +62,13 @@ class Sizes {
   Size? large;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
 @embedded
 class Size {
-  Size();
-
-  factory Size.fromJson(Map<String, dynamic> json) => _$SizeFromJson(json);
+  Size({
+    this.w,
+    this.h,
+    this.resize,
+  });
 
   int? w;
 
@@ -65,13 +77,14 @@ class Size {
   String? resize;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
 @embedded
 class AdditionalMediaInfo {
-  AdditionalMediaInfo();
-
-  factory AdditionalMediaInfo.fromJson(Map<String, dynamic> json) =>
-      _$AdditionalMediaInfoFromJson(json);
+  AdditionalMediaInfo({
+    this.title,
+    this.description,
+    this.embeddable,
+    this.monetizable,
+  });
 
   String? title;
 
@@ -82,13 +95,13 @@ class AdditionalMediaInfo {
   bool? monetizable;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
 @embedded
 class VideoInfo {
-  VideoInfo();
-
-  factory VideoInfo.fromJson(Map<String, dynamic> json) =>
-      _$VideoInfoFromJson(json);
+  VideoInfo({
+    this.aspectRatio,
+    this.durationMillis,
+    this.variants,
+  });
 
   List<int>? aspectRatio;
 
@@ -97,13 +110,13 @@ class VideoInfo {
   List<Variant>? variants;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
 @embedded
 class Variant {
-  Variant();
-
-  factory Variant.fromJson(Map<String, dynamic> json) =>
-      _$VariantFromJson(json);
+  Variant({
+    this.bitrate,
+    this.contentType,
+    this.url,
+  });
 
   int? bitrate;
 

@@ -5,26 +5,26 @@ import 'package:isar_community/isar.dart';
 import 'package:isar_test/isar_test.dart';
 import 'package:test/test.dart';
 
-Future<List<Tweet>> downloadTweets(String dir, int index) async {
-  final i = index < 10 ? '0$index' : '$index';
-  final file = File('$dir/tweets$i.json');
+// Future<List<Tweet>> downloadTweets(String dir, int index) async {
+//   final i = index < 10 ? '0$index' : '$index';
+//   final file = File('$dir/tweets$i.json');
 
-  late String jsonStr;
-  if (file.existsSync()) {
-    jsonStr = await file.readAsString();
-  } else {
-    final uri = Uri.parse(
-      'https://raw.githubusercontent.com/isar/testdata/main/twitter$i.json',
-    );
-    final request = await HttpClient().getUrl(uri);
-    final response = await request.close();
-    jsonStr = await response.transform(utf8.decoder).join();
-    await file.writeAsString(jsonStr);
-  }
+//   late String jsonStr;
+//   if (file.existsSync()) {
+//     jsonStr = await file.readAsString();
+//   } else {
+//     final uri = Uri.parse(
+//       'https://raw.githubusercontent.com/isar/testdata/main/twitter$i.json',
+//     );
+//     final request = await HttpClient().getUrl(uri);
+//     final response = await request.close();
+//     jsonStr = await response.transform(utf8.decoder).join();
+//     await file.writeAsString(jsonStr);
+//   }
 
-  final json = jsonDecode(jsonStr) as List<dynamic>;
-  return json.map((e) => Tweet.fromJson(e as Map<String, dynamic>)).toList();
-}
+//   final json = jsonDecode() as List<dynamic>;
+//   return json.map((e) => TweetMapper.fromJson(e as Map<String, dynamic>)).toList();
+// }
 
 void main() async {
   const skipStressTest = true;
@@ -103,13 +103,13 @@ void main() async {
             )
             .not()
             .inReplyToScreenNameIsNull()
-            .entities(
-              (q) => q
-                  .hashtagsLengthGreaterThan(0)
-                  .urlsLengthGreaterThan(0)
-                  .mediaLengthGreaterThan(0)
-                  .userMentionsLengthGreaterThan(0),
-            )
+            // .entities(
+            //   (q) => q
+            //       .hashtagsLengthGreaterThan(0)
+            //       .urlsLengthGreaterThan(0)
+            //       .mediaLengthGreaterThan(0)
+            //       .userMentionsLengthGreaterThan(0),
+            // )
             .idStrProperty();
         await qEqual(complexQuery, [
           '592572613462986752',

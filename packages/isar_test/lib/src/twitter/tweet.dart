@@ -4,20 +4,44 @@ import 'package:isar_test/src/twitter/geo.dart';
 import 'package:isar_test/src/twitter/media.dart';
 import 'package:isar_test/src/twitter/user.dart';
 import 'package:isar_test/src/twitter/util.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'tweet.g.dart';
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
 @collection
 class Tweet {
-  Tweet();
-
-  factory Tweet.fromJson(Map<String, dynamic> json) => _$TweetFromJson(json);
+  Tweet({
+    this.isarId,
+    this.createdAt,
+    this.idStr,
+    this.source,
+    this.truncated,
+    this.inReplyToStatusIdStr,
+    this.inReplyToUserIdStr,
+    this.inReplyToScreenName,
+    this.user,
+    this.coordinates,
+    this.place,
+    this.quotedStatusIdStr,
+    this.isQuoteStatus,
+    this.quoteCount,
+    this.replyCount,
+    this.retweetCount,
+    this.favoriteCount,
+    this.entities,
+    this.extendedEntities,
+    this.favorited,
+    this.retweeted,
+    this.possiblySensitive,
+    this.possiblySensitiveAppealable,
+    this.currentUserRetweet,
+    this.lang,
+    this.quotedStatusPermalink,
+    this.fullText,
+    this.displayTextRange,
+  });
 
   Id? isarId;
 
-  @JsonKey(fromJson: convertTwitterDateTime)
   DateTime? createdAt;
 
   String? idStr;
@@ -73,24 +97,22 @@ class Tweet {
   List<int>? displayTextRange;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
 @embedded
 class CurrentUserRetweet {
-  CurrentUserRetweet();
-
-  factory CurrentUserRetweet.fromJson(Map<String, dynamic> json) =>
-      _$CurrentUserRetweetFromJson(json);
+  CurrentUserRetweet({
+    this.idStr,
+  });
 
   String? idStr;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
 @embedded
 class QuotedStatusPermalink {
-  QuotedStatusPermalink();
-
-  factory QuotedStatusPermalink.fromJson(Map<String, dynamic> json) =>
-      _$QuotedStatusPermalinkFromJson(json);
+  QuotedStatusPermalink({
+    this.url,
+    this.expanded,
+    this.display,
+  });
 
   String? url;
 

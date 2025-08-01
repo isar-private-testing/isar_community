@@ -1,18 +1,20 @@
 import 'package:isar_community/isar.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 import 'media.dart';
 import 'util.dart';
 
 part 'entities.g.dart';
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
 @embedded
 class Entities {
-  Entities();
-
-  factory Entities.fromJson(Map<String, dynamic> json) =>
-      _$EntitiesFromJson(json);
+  Entities({
+    this.hashtags,
+    this.media,
+    this.urls,
+    this.userMentions,
+    this.symbols,
+    this.polls,
+  });
 
   List<Hashtag>? hashtags;
 
@@ -27,64 +29,65 @@ class Entities {
   List<Poll>? polls;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
 @embedded
 class Hashtag {
-  Hashtag();
-
-  factory Hashtag.fromJson(Map<String, dynamic> json) =>
-      _$HashtagFromJson(json);
+  Hashtag({
+    this.indices,
+    this.text,
+  });
 
   List<int>? indices;
 
   String? text;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
 @embedded
 class Poll {
-  Poll();
-
-  factory Poll.fromJson(Map<String, dynamic> json) => _$PollFromJson(json);
+  Poll({
+    this.options,
+    this.endDatetime,
+    this.durationMinutes,
+  });
 
   List<Option>? options;
 
-  @JsonKey(fromJson: convertTwitterDateTime)
   DateTime? endDatetime;
 
   String? durationMinutes;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
 @embedded
 class Option {
-  Option();
-
-  factory Option.fromJson(Map<String, dynamic> json) => _$OptionFromJson(json);
+  Option({
+    this.position,
+    this.text,
+  });
 
   int? position;
 
   String? text;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
 @embedded
 class Symbol {
-  Symbol();
-
-  factory Symbol.fromJson(Map<String, dynamic> json) => _$SymbolFromJson(json);
+  Symbol({
+    this.indices,
+    this.text,
+  });
 
   List<int>? indices;
 
   String? text;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
 @embedded
 class Url {
-  Url();
-
-  factory Url.fromJson(Map<String, dynamic> json) => _$UrlFromJson(json);
+  Url({
+    this.displayUrl,
+    this.expandedUrl,
+    this.indices,
+    this.url,
+  });
 
   String? displayUrl;
 
@@ -95,13 +98,14 @@ class Url {
   String? url;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake, createToJson: false)
 @embedded
 class UserMention {
-  UserMention();
-
-  factory UserMention.fromJson(Map<String, dynamic> json) =>
-      _$UserMentionFromJson(json);
+  UserMention({
+    this.idStr,
+    this.indices,
+    this.name,
+    this.screenName,
+  });
 
   String? idStr;
 
