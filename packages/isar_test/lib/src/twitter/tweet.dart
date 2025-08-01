@@ -1,4 +1,3 @@
-import 'package:dart_mappable/dart_mappable.dart';
 import 'package:isar_community/isar.dart';
 import 'package:isar_test/src/twitter/entities.dart';
 import 'package:isar_test/src/twitter/geo.dart';
@@ -6,11 +5,10 @@ import 'package:isar_test/src/twitter/media.dart';
 import 'package:isar_test/src/twitter/user.dart';
 import 'package:isar_test/src/twitter/util.dart';
 
-part 'tweet.mapper.dart';
+part 'tweet.g.dart';
 
-@MappableClass()
 @collection
-class Tweet with TweetMappable {
+class Tweet {
   Tweet({
     this.isarId,
     this.createdAt,
@@ -44,7 +42,6 @@ class Tweet with TweetMappable {
 
   Id? isarId;
 
-  @MappableField(hook: DateTimeFromStringHook())
   DateTime? createdAt;
 
   String? idStr;
@@ -100,9 +97,8 @@ class Tweet with TweetMappable {
   List<int>? displayTextRange;
 }
 
-@MappableClass()
 @embedded
-class CurrentUserRetweet with CurrentUserRetweetMappable {
+class CurrentUserRetweet {
   CurrentUserRetweet({
     this.idStr,
   });
@@ -110,9 +106,8 @@ class CurrentUserRetweet with CurrentUserRetweetMappable {
   String? idStr;
 }
 
-@MappableClass()
 @embedded
-class QuotedStatusPermalink with QuotedStatusPermalinkMappable {
+class QuotedStatusPermalink {
   QuotedStatusPermalink({
     this.url,
     this.expanded,

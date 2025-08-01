@@ -1,11 +1,9 @@
 import 'package:isar_community/isar.dart';
-import 'package:dart_mappable/dart_mappable.dart';
 
-part 'geo.mapper.dart';
+part 'geo.g.dart';
 
-@MappableClass()
 @embedded
-class Place with PlaceMappable {
+class Place {
   Place({
     this.id,
     this.url,
@@ -40,9 +38,8 @@ enum PlaceType {
   neighborhood;
 }
 
-@MappableClass()
 @embedded
-class Coordinates with CoordinatesMappable {
+class Coordinates {
   Coordinates({
     this.coordinates,
     this.type,

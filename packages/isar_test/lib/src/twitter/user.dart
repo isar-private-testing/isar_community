@@ -1,13 +1,11 @@
 import 'package:isar_community/isar.dart';
 import 'package:isar_test/src/twitter/entities.dart';
 import 'package:isar_test/src/twitter/util.dart';
-import 'package:dart_mappable/dart_mappable.dart';
 
-part 'user.mapper.dart';
+part 'user.g.dart';
 
-@MappableClass()
 @embedded
-class User with UserMappable {
+class User {
   User({
     this.idStr,
     this.name,
@@ -60,7 +58,6 @@ class User with UserMappable {
 
   int? statusesCount;
 
-  @MappableField(hook: DateTimeFromStringHook())
   DateTime? createdAt;
 
   String? profileBannerUrl;
@@ -76,9 +73,8 @@ class User with UserMappable {
   String? withheldScope;
 }
 
-@MappableClass()
 @embedded
-class UserEntities with UserEntitiesMappable {
+class UserEntities {
   UserEntities({
     this.url,
     this.description,
@@ -89,9 +85,8 @@ class UserEntities with UserEntitiesMappable {
   UserEntityUrl? description;
 }
 
-@MappableClass()
 @embedded
-class UserEntityUrl with UserEntityUrlMappable {
+class UserEntityUrl {
   UserEntityUrl({
     this.urls,
   });

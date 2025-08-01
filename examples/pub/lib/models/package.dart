@@ -2,11 +2,9 @@ import 'package:isar_community/isar.dart';
 import 'package:pub_app/models/api/metrics.dart';
 import 'package:pub_app/models/api/package.dart';
 import 'package:pubspec/pubspec.dart';
-import 'package:dart_mappable/dart_mappable.dart';
 
-part 'package.mapper.dart';
+part 'package.g.dart';
 
-@MappableClass()
 @collection
 class Package {
   Package({

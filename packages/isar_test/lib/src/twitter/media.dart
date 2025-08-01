@@ -1,11 +1,9 @@
 import 'package:isar_community/isar.dart';
-import 'package:dart_mappable/dart_mappable.dart';
 
-part 'media.mapper.dart';
+part 'media.g.dart';
 
-@MappableClass()
 @embedded
-class Media with MediaMappable {
+class Media {
   Media({
     this.displayUrl,
     this.expandedUrl,
@@ -46,9 +44,8 @@ class Media with MediaMappable {
   AdditionalMediaInfo? additionalMediaInfo;
 }
 
-@MappableClass()
 @embedded
-class Sizes with SizesMappable {
+class Sizes {
   Sizes({
     this.thumb,
     this.medium,
@@ -65,9 +62,8 @@ class Sizes with SizesMappable {
   Size? large;
 }
 
-@MappableClass()
 @embedded
-class Size with SizeMappable {
+class Size {
   Size({
     this.w,
     this.h,
@@ -81,9 +77,8 @@ class Size with SizeMappable {
   String? resize;
 }
 
-@MappableClass()
 @embedded
-class AdditionalMediaInfo with AdditionalMediaInfoMappable {
+class AdditionalMediaInfo {
   AdditionalMediaInfo({
     this.title,
     this.description,
@@ -100,9 +95,8 @@ class AdditionalMediaInfo with AdditionalMediaInfoMappable {
   bool? monetizable;
 }
 
-@MappableClass()
 @embedded
-class VideoInfo with VideoInfoMappable {
+class VideoInfo {
   VideoInfo({
     this.aspectRatio,
     this.durationMillis,
@@ -116,9 +110,8 @@ class VideoInfo with VideoInfoMappable {
   List<Variant>? variants;
 }
 
-@MappableClass()
 @embedded
-class Variant with VariantMappable {
+class Variant {
   Variant({
     this.bitrate,
     this.contentType,

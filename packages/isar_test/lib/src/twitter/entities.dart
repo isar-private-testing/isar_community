@@ -1,11 +1,12 @@
 import 'package:isar_community/isar.dart';
-import 'package:dart_mappable/dart_mappable.dart';
 
-part 'entities.mapper.dart';
+import 'media.dart';
+import 'util.dart';
 
-@MappableClass()
+part 'entities.g.dart';
+
 @embedded
-class Entities with EntitiesMappable {
+class Entities {
   Entities({
     this.hashtags,
     this.media,
@@ -28,9 +29,8 @@ class Entities with EntitiesMappable {
   List<Poll>? polls;
 }
 
-@MappableClass()
 @embedded
-class Hashtag with HashtagMappable {
+class Hashtag {
   Hashtag({
     this.indices,
     this.text,
@@ -41,9 +41,8 @@ class Hashtag with HashtagMappable {
   String? text;
 }
 
-@MappableClass()
 @embedded
-class Poll with PollMappable {
+class Poll {
   Poll({
     this.options,
     this.endDatetime,
@@ -52,15 +51,13 @@ class Poll with PollMappable {
 
   List<Option>? options;
 
-  @MappableField(hook: DateTimeFromStringHook())
   DateTime? endDatetime;
 
   String? durationMinutes;
 }
 
-@MappableClass()
 @embedded
-class Option with OptionMappable {
+class Option {
   Option({
     this.position,
     this.text,
@@ -71,9 +68,8 @@ class Option with OptionMappable {
   String? text;
 }
 
-@MappableClass()
 @embedded
-class Symbol with SymbolMappable {
+class Symbol {
   Symbol({
     this.indices,
     this.text,
@@ -84,9 +80,8 @@ class Symbol with SymbolMappable {
   String? text;
 }
 
-@MappableClass()
 @embedded
-class Url with UrlMappable {
+class Url {
   Url({
     this.displayUrl,
     this.expandedUrl,
@@ -103,9 +98,8 @@ class Url with UrlMappable {
   String? url;
 }
 
-@MappableClass()
 @embedded
-class UserMention with UserMentionMappable {
+class UserMention {
   UserMention({
     this.idStr,
     this.indices,
