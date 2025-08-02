@@ -35,66 +35,62 @@ export AR_aarch64_linux_android=$COMPILER_DIR/llvm-ar
 export CARGO_TARGET_AARCH64_LINUX_ANDROID_LINKER=$COMPILER_DIR/aarch64-linux-android21-clang
 export CARGO_TARGET_AARCH64_LINUX_ANDROID_AR=$COMPILER_DIR/llvm-ar
 
-echo "Current working directory: $(pwd)"
 cd packages/isar_core_ffi
-echo "Changed to: $(pwd)"
 
 if [ "$1" = "x86" ]; then
   rustup target add i686-linux-android
   cargo build --target i686-linux-android --release
-  echo "Build completed, checking files:"
-  ls -la target/i686-linux-android/release/ | grep libisar || echo "No libisar.so found"
-  # Check for different possible library names
-  if [ -f "target/i686-linux-android/release/libisar.so" ]; then
-    mv "target/i686-linux-android/release/libisar.so" "../../libisar_android_x86.so"
-  else
-    echo "ERROR: No library found, available files:"
-    ls -la target/i686-linux-android/release/
-    find target/i686-linux-android/release/ -name "*.so" || echo "No .so files found"
-  fi
+  mv "target/i686-linux-android/release/libisar.so" "../../libisar_android_x86.so"
 elif [ "$1" = "x64" ]; then
+  echo "Building x64 with 16KB page size support..."
   rustup target add x86_64-linux-android
-  cargo build --target x86_64-linux-android --release
-  echo "Build completed, checking files:"
-  ls -la target/x86_64-linux-android/release/ | grep libisar || echo "No libisar.so found"
-  # Check for different possible library names
-  if [ -f "target/x86_64-linux-android/release/libisar.so" ]; then
-    mv "target/x86_64-linux-android/release/libisar.so" "../../libisar_android_x64.so"
-  elif [ -f "target/x86_64-linux-android/release/libisar_core_ffi.so" ]; then
-    mv "target/x86_64-linux-android/release/libisar_core_ffi.so" "../../libisar_android_x64.so"
+  
+  echo "=== Checking cargo config ==="
+  echo "Current directory: $(pwd)"
+  echo "Checking if .cargo/config.toml exists:"
+  ls -la .cargo/config.toml 2>/dev/null || echo ".cargo/config.toml not found in current directory"
+  
+  echo "Checking cargo config for x86_64-linux-android target:"
+  cargo config get target.x86_64-linux-android.rustflags 2>/dev/null || echo "No rustflags found for x86_64-linux-android"
+  
+  echo "Checking all target configurations:"
+  cargo config get --show-origin 2>/dev/null | grep -A5 -B5 "x86_64-linux-android\|rustflags\|max-page-size" || echo "No relevant config found"
+  
+  echo "=== Starting build ==="
+  echo "Running: cargo build --target x86_64-linux-android --release"
+  
+  if cargo build --target x86_64-linux-android --release; then
+    echo "Build succeeded, looking for library..."
+    
+    # Check local target directory first
+    if [ -f "target/x86_64-linux-android/release/libisar.so" ]; then
+      echo "Found library in local target directory"
+      mv "target/x86_64-linux-android/release/libisar.so" "../../libisar_android_x64.so"
+    # Check workspace root target directory  
+    elif [ -f "../../target/x86_64-linux-android/release/libisar.so" ]; then
+      echo "Found library in workspace root target directory"
+      mv "../../target/x86_64-linux-android/release/libisar.so" "../../libisar_android_x64.so"
+    else
+      echo "ERROR: Library not found in either location"
+      echo "Local target contents:"
+      ls -la target/ 2>/dev/null || echo "No local target directory"
+      echo "Workspace target contents:"
+      ls -la ../../target/ 2>/dev/null || echo "No workspace target directory"
+      exit 1
+    fi
+    echo "Library moved successfully"
   else
-    echo "ERROR: No library found in target/x86_64-linux-android/release/"
-    echo "Available files:"
-    ls -la target/x86_64-linux-android/release/
-    echo "Looking for any .so files:"
-    find target/x86_64-linux-android/release/ -name "*.so" || echo "No .so files found"
+    echo "ERROR: cargo build failed with exit code $?"
+    exit 1
   fi
 elif [ "$1" = "armv7" ]; then
   rustup target add armv7-linux-androideabi
   cargo build --target armv7-linux-androideabi --release
-  echo "Build completed, checking files:"
-  ls -la target/armv7-linux-androideabi/release/ | grep libisar || echo "No libisar.so found"
-  # Check for different possible library names
-  if [ -f "target/armv7-linux-androideabi/release/libisar.so" ]; then
-    mv "target/armv7-linux-androideabi/release/libisar.so" "../../libisar_android_armv7.so"
-  else
-    echo "ERROR: No library found, available files:"
-    ls -la target/armv7-linux-androideabi/release/
-    find target/armv7-linux-androideabi/release/ -name "*.so" || echo "No .so files found"
-  fi
+  mv "target/armv7-linux-androideabi/release/libisar.so" "../../libisar_android_armv7.so"
 else
   rustup target add aarch64-linux-android
   cargo build --target aarch64-linux-android --release
-  echo "Build completed, checking files:"
-  ls -la target/aarch64-linux-android/release/ | grep libisar || echo "No libisar.so found"
-  # Check for different possible library names
-  if [ -f "target/aarch64-linux-android/release/libisar.so" ]; then
-    mv "target/aarch64-linux-android/release/libisar.so" "../../libisar_android_arm64.so"
-  else
-    echo "ERROR: No library found, available files:"
-    ls -la target/aarch64-linux-android/release/
-    find target/aarch64-linux-android/release/ -name "*.so" || echo "No .so files found"
-  fi
+  mv "target/aarch64-linux-android/release/libisar.so" "../../libisar_android_arm64.so"
 fi
 
 
