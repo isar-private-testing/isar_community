@@ -40,7 +40,16 @@ cd packages/isar_core_ffi
 if [ "$1" = "x86" ]; then
   rustup target add i686-linux-android
   cargo build --target i686-linux-android --release
-  mv "target/i686-linux-android/release/libisar.so" "../../libisar_android_x86.so"
+  
+  # Check both possible locations for the library
+  if [ -f "target/i686-linux-android/release/libisar.so" ]; then
+    mv "target/i686-linux-android/release/libisar.so" "../../libisar_android_x86.so"
+  elif [ -f "../../target/i686-linux-android/release/libisar.so" ]; then
+    mv "../../target/i686-linux-android/release/libisar.so" "../../libisar_android_x86.so"
+  else
+    echo "ERROR: Library not found for i686-linux-android"
+    exit 1
+  fi
 elif [ "$1" = "x64" ]; then
   echo "Building x64 with 16KB page size support..."
   rustup target add x86_64-linux-android
@@ -86,11 +95,29 @@ elif [ "$1" = "x64" ]; then
 elif [ "$1" = "armv7" ]; then
   rustup target add armv7-linux-androideabi
   cargo build --target armv7-linux-androideabi --release
-  mv "target/armv7-linux-androideabi/release/libisar.so" "../../libisar_android_armv7.so"
+  
+  # Check both possible locations for the library
+  if [ -f "target/armv7-linux-androideabi/release/libisar.so" ]; then
+    mv "target/armv7-linux-androideabi/release/libisar.so" "../../libisar_android_armv7.so"
+  elif [ -f "../../target/armv7-linux-androideabi/release/libisar.so" ]; then
+    mv "../../target/armv7-linux-androideabi/release/libisar.so" "../../libisar_android_armv7.so"
+  else
+    echo "ERROR: Library not found for armv7-linux-androideabi"
+    exit 1
+  fi
 else
   rustup target add aarch64-linux-android
   cargo build --target aarch64-linux-android --release
-  mv "target/aarch64-linux-android/release/libisar.so" "../../libisar_android_arm64.so"
+  
+  # Check both possible locations for the library
+  if [ -f "target/aarch64-linux-android/release/libisar.so" ]; then
+    mv "target/aarch64-linux-android/release/libisar.so" "../../libisar_android_arm64.so"
+  elif [ -f "../../target/aarch64-linux-android/release/libisar.so" ]; then
+    mv "../../target/aarch64-linux-android/release/libisar.so" "../../libisar_android_arm64.so"
+  else
+    echo "ERROR: Library not found for aarch64-linux-android"
+    exit 1
+  fi
 fi
 
 
