@@ -152,7 +152,7 @@ fn main() {
         println!(r"cargo:rustc-link-lib=kernel32");
         println!(r"cargo:rustc-link-search=C:\windows\system32");
     } else {
-        cc_builder
+        let mut builder = cc_builder
             .define("MDBX_BUILD_FLAGS", flags.as_str())
             .define("MDBX_BUILD_CXX", "0")
             .define("MDBX_BUILD_TOOLS", "0")
@@ -161,7 +161,14 @@ fn main() {
             .define("MDBX_TXN_CHECKOWNER", "0")
             .define("MDBX_OSX_SPEED_INSTEADOF_DURABILITY", "1")
             .define("MDBX_HAVE_BUILTIN_CPU_SUPPORTS", "0")
-            .define("NDEBUG", "1")
+            .define("NDEBUG", "1");
+        
+        // Add 16KB page size support for Android
+        if is_android {
+            builder = builder.define("MDBX_ENV_CHECKPID", "0");
+        }
+        
+        builder
             .file(mdbx.join("mdbx.c"))
             .compile("libmdbx.a");
     }
