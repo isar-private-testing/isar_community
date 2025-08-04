@@ -69,7 +69,13 @@ jobs:
         run: echo "ISAR_VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
       - name: Build binary
         run: bash tool/${{ matrix.script }}
-      - name: Upload binary
+      - name: Upload binary to artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: ${{ matrix.artifact_name }}
+          retention-days: 1
+      - name: Upload binary to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -163,3 +169,16 @@ jobs:
   #     - name: Publish isar_community_flutter_libs
   #       run: dart pub publish --force
   #       working-directory: packages/isar_community_flutter_libs
+
+  cleanup_on_failure:
+    name: Cleanup Release on Failure
+    runs-on: ubuntu-24.04
+    needs: [build_binaries, testlab, build_inspector, upload_to_repo]
+    if: always() && contains(needs.*.result, 'failure')
+    steps:
+      - name: Delete release on failure
+        run: |
+          echo "One or more jobs failed. Deleting release ${{ github.ref_name }}"
+          gh release delete ${{ github.ref_name }} --yes || echo "Release not found or already deleted"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
