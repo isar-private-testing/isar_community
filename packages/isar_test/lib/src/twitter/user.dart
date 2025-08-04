@@ -1,6 +1,5 @@
 import 'package:isar_community/isar.dart';
 import 'package:isar_test/src/twitter/entities.dart';
-import 'package:isar_test/src/twitter/util.dart';
 
 part 'user.g.dart';
 

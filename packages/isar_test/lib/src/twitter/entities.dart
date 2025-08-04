@@ -1,7 +1,6 @@
 import 'package:isar_community/isar.dart';
 
-import 'media.dart';
-import 'util.dart';
+import 'package:isar_test/src/twitter/media.dart';
 
 part 'entities.g.dart';
 

@@ -53,7 +53,7 @@ void main() {
     await isar2.tWriteTxn(() {
       return isar2.col2s.tPutAll([
         Col2(1, 'value3', ['hi']),
-        Col2(3, 'value4', [])
+        Col2(3, 'value4', []),
       ]);
     });
     await qEqual(isar2.col2s.where(), [

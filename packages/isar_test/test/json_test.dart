@@ -49,7 +49,7 @@ void main() {
 const tweetJson = {
   'coordinates': {
     'coordinates': [14.48532271, 40.63070878],
-    'type': 'Point'
+    'type': 'Point',
   },
   'createdAt': 1432502262000000,
   'currentUserRetweet': null,
@@ -58,20 +58,20 @@ const tweetJson = {
     'hashtags': [
       {
         'indices': [42, 51],
-        'text': 'foodporn'
+        'text': 'foodporn',
       },
       {
         'indices': [52, 64],
-        'text': 'gialloblogs'
+        'text': 'gialloblogs',
       },
       {
         'indices': [65, 87],
-        'text': 'RicetteBloggerRiunite'
+        'text': 'RicetteBloggerRiunite',
       },
       {
         'indices': [88, 97],
-        'text': 'Expo2015'
-      }
+        'text': 'Expo2015',
+      },
     ],
     'media': [
       {
@@ -87,13 +87,13 @@ const tweetJson = {
           'large': {'h': 450, 'resize': 'fit', 'w': 600},
           'medium': {'h': 450, 'resize': 'fit', 'w': 600},
           'small': {'h': 450, 'resize': 'fit', 'w': 600},
-          'thumb': {'h': 150, 'resize': 'crop', 'w': 150}
+          'thumb': {'h': 150, 'resize': 'crop', 'w': 150},
         },
         'sourceStatusIdStr': '602408908561473536',
         'type': 'photo',
         'url': 'http://t.co/yFgRfzL6DF',
-        'videoInfo': null
-      }
+        'videoInfo': null,
+      },
     ],
     'polls': null,
     'symbols': <dynamic>[],
@@ -103,17 +103,17 @@ const tweetJson = {
         'expandedUrl':
             'http://blog.giallozafferano.it/lacucinadikaty/cheesecake-frutta/',
         'indices': [18, 40],
-        'url': 'http://t.co/S8yyMcL62d'
-      }
+        'url': 'http://t.co/S8yyMcL62d',
+      },
     ],
     'userMentions': [
       {
         'idStr': '993103729',
         'indices': [1, 16],
         'name': 'La cucina di katy',
-        'screenName': 'caterinaboagno'
-      }
-    ]
+        'screenName': 'caterinaboagno',
+      },
+    ],
   },
   'extendedEntities': {
     'hashtags': null,
@@ -131,18 +131,18 @@ const tweetJson = {
           'large': {'h': 450, 'resize': 'fit', 'w': 600},
           'medium': {'h': 450, 'resize': 'fit', 'w': 600},
           'small': {'h': 450, 'resize': 'fit', 'w': 600},
-          'thumb': {'h': 150, 'resize': 'crop', 'w': 150}
+          'thumb': {'h': 150, 'resize': 'crop', 'w': 150},
         },
         'sourceStatusIdStr': '602408908561473536',
         'type': 'photo',
         'url': 'http://t.co/yFgRfzL6DF',
-        'videoInfo': null
-      }
+        'videoInfo': null,
+      },
     ],
     'polls': null,
     'symbols': null,
     'urls': null,
-    'userMentions': null
+    'userMentions': null,
   },
   'favoriteCount': 2,
   'favorited': false,
@@ -162,7 +162,7 @@ const tweetJson = {
     'id': 'ab6034f6c3eb69c8',
     'name': 'Positano',
     'placeType': 'city',
-    'url': 'https://api.twitter.com/1.1/geo/id/ab6034f6c3eb69c8.json'
+    'url': 'https://api.twitter.com/1.1/geo/id/ab6034f6c3eb69c8.json',
   },
   'possiblySensitive': false,
   'possiblySensitiveAppealable': null,
@@ -182,7 +182,7 @@ const tweetJson = {
     'description': 'Born&Living in Positano ❤',
     'entities': {
       'description': {'urls': <dynamic>[]},
-      'url': null
+      'url': null,
     },
     'favoritesCount': null,
     'followersCount': 1671,
@@ -201,6 +201,6 @@ const tweetJson = {
     'url': null,
     'verified': false,
     'withheldInCountries': <dynamic>[],
-    'withheldScope': null
-  }
+    'withheldScope': null,
+  },
 };

@@ -3,7 +3,6 @@ import 'package:isar_test/src/twitter/entities.dart';
 import 'package:isar_test/src/twitter/geo.dart';
 import 'package:isar_test/src/twitter/media.dart';
 import 'package:isar_test/src/twitter/user.dart';
-import 'package:isar_test/src/twitter/util.dart';
 
 part 'tweet.g.dart';
 

@@ -283,7 +283,7 @@ void main() {
       await qEqual(isar.boolModels.where().listProperty(), [
         [true, false, true],
         <bool>[],
-        [true]
+        [true],
       ]);
 
       await qEqual(isar.boolModels.where().nListProperty(), [
@@ -309,7 +309,7 @@ void main() {
         [
           Uint8List.fromList([0, 10, 255]),
           Uint8List.fromList([]),
-          Uint8List.fromList([3])
+          Uint8List.fromList([3]),
         ],
       );
 
@@ -318,7 +318,7 @@ void main() {
         [
           null,
           Uint8List.fromList([1, 2, 3, 4, 5]),
-          null
+          null,
         ],
       );
     });
@@ -391,13 +391,13 @@ void main() {
       await qEqual(isar.floatModels.where().listProperty(), [
         [-5.5, 70.7, 999.999],
         <double>[],
-        [0.0]
+        [0.0],
       ]);
 
       await qEqual(isar.floatModels.where().nListProperty(), [
         [double.infinity],
         null,
-        [double.maxFinite]
+        [double.maxFinite],
       ]);
     });
 
@@ -417,13 +417,13 @@ void main() {
       await qEqual(isar.doubleModels.where().listProperty(), [
         [-5.5, 70.7, 999.999],
         <double>[],
-        [0.0]
+        [0.0],
       ]);
 
       await qEqual(isar.doubleModels.where().nListProperty(), [
         [double.infinity],
         null,
-        [double.maxFinite]
+        [double.maxFinite],
       ]);
     });
 
@@ -443,7 +443,7 @@ void main() {
       await qEqual(isar.dateTimeModels.where().listProperty(), [
         [DateTime(2019), DateTime(2020)],
         [DateTime(2020)],
-        <DateTime>[]
+        <DateTime>[],
       ]);
 
       await qEqual(isar.dateTimeModels.where().nListProperty(), [
@@ -469,7 +469,7 @@ void main() {
         [
           ['Just', 'a', 'test'],
           <String>[],
-          ['']
+          [''],
         ],
       );
 
@@ -478,7 +478,7 @@ void main() {
         [
           null,
           null,
-          ['HELLO']
+          ['HELLO'],
         ],
       );
     });
@@ -501,7 +501,7 @@ void main() {
         [
           <EmbeddedModel>[],
           [EmbeddedModel('abc'), EmbeddedModel('def')],
-          [EmbeddedModel()]
+          [EmbeddedModel()],
         ],
       );
 
@@ -510,7 +510,7 @@ void main() {
         [
           [EmbeddedModel('abc'), EmbeddedModel('def')],
           null,
-          [EmbeddedModel()]
+          [EmbeddedModel()],
         ],
       );
     });
@@ -531,7 +531,7 @@ void main() {
         [
           [TestEnum.option2],
           [TestEnum.option1],
-          <TestEnum>[]
+          <TestEnum>[],
         ],
       );
 
@@ -540,7 +540,7 @@ void main() {
         [
           [TestEnum.option2, TestEnum.option3],
           null,
-          null
+          null,
         ],
       );
     });

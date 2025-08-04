@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:isar_community/isar.dart';
 import 'package:isar_test/isar_test.dart';
@@ -23,7 +21,9 @@ import 'package:test/test.dart';
 //   }
 
 //   final json = jsonDecode() as List<dynamic>;
-//   return json.map((e) => TweetMapper.fromJson(e as Map<String, dynamic>)).toList();
+//   return json
+//       .map((e) => TweetMapper.fromJson(e as Map<String, dynamic>))
+//       .toList();
 // }
 
 void main() async {
@@ -66,7 +66,7 @@ void main() async {
           (await col.where().createdAtProperty().tMax())!.toUtc(),
           DateTime.utc(2015, 6, 18, 10, 1, 57),
         );
-      }, skip: skipStressTest);
+      }, skip: skipStressTest,);
 
       isarTest('Distinct', () async {
         await qEqualSet(col.where().distinctByLang().langProperty(), [
@@ -74,9 +74,9 @@ void main() async {
           'hu', 'ja', 'et', 'tl', 'eu', 'pl', 'ht', 'in', 'lt', 'ar', //
           'ca', 'ru', 'el', 'ro', 'uk', 'sl', 'cy', 'no', 'nl', 'sv', //
           'fi', 'zh', 'tr', 'cs', 'lv', 'hi', 'is', 'da', 'bg', 'vi', //
-          'ko', 'fa', 'th', 'sr', 'ne', 'ur', 'iw'
+          'ko', 'fa', 'th', 'sr', 'ne', 'ur', 'iw',
         ]);
-      }, skip: skipStressTest);
+      }, skip: skipStressTest,);
 
       isarTest('Sort by', () async {
         final query = col
@@ -87,7 +87,7 @@ void main() async {
             .limit(5)
             .isarIdProperty();
         await qEqual(query, [458669, 441027, 368275, 222021, 368289]);
-      }, skip: skipStressTest);
+      }, skip: skipStressTest,);
 
       isarTest('Query', () async {
         final complexQuery = col
@@ -115,9 +115,9 @@ void main() async {
           '592572613462986752',
           '596576703285174272',
           '597445810696126464',
-          '602584278883553280'
+          '602584278883553280',
         ]);
-      }, skip: skipStressTest);
+      }, skip: skipStressTest,);
     },
     timeout: const Timeout(Duration(minutes: 10)),
   );
