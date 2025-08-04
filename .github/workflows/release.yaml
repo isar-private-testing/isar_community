@@ -126,7 +126,7 @@ jobs:
         run: |
           git config --global user.email "vicente.russo@gmail.com"
           git config --global user.name "GitHub Actions"
-          git clone https://github.com/isar-private-testing/binaries repo
+          git clone https://x-access-token:${GITHUB_TOKEN}@github.com/isar-private-testing/binaries.git repo
           cd repo
           git checkout main || git checkout -b main
         env:
