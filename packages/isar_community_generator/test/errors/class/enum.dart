@@ -2,6 +2,6 @@
 
 import 'package:isar_community/isar.dart';
 
-// ignore: invalid_annotation_target
+// ignore: invalid_annotation_target - annotation intentionally applied to enum for testing error handling
 @collection
 enum Test { a, b, c }

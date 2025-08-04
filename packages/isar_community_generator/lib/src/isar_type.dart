@@ -77,7 +77,7 @@ extension DartTypeX on DartType {
           return IsarType.stringList;
         case IsarType.object:
           return IsarType.objectList;
-        // ignore: no_default_cases
+        // ignore: no_default_cases - default case needed for exhaustive switch
         default:
           return null;
       }

@@ -136,7 +136,7 @@ String generateEstimateSerialize(ObjectInfo object) {
         );
         break;
 
-      // ignore: no_default_cases
+      // ignore: no_default_cases - default case needed for exhaustive switch
       default:
         break;
     }
@@ -432,7 +432,7 @@ String generateAttach(ObjectInfo object) {
   }
 
   for (final link in object.links) {
-    // ignore: leading_newlines_in_multiline_strings
+    // ignore: leading_newlines_in_multiline_strings - template string requires leading newline for proper formatting
     code += '''object.${link.dartName}.attach(
       col,
       col.isar.collection<${link.targetCollectionDartName}>(),
