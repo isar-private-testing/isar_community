@@ -105,7 +105,7 @@ jobs:
         with:
           folder: packages/isar_community_inspector/build/web
           repository-name: isar-private-testing/inspector
-          token: ${{ secrets.TOKEN }}
+          token: ${{ secrets.DEPLOY_TOKEN }}
           target-folder: ${{ github.ref_name }}
           clean: false
 
@@ -203,7 +203,7 @@ jobs:
             echo "Inspector folder ${{ github.ref_name }} not found, nothing to revert"
           fi
         env:
-          TOKEN: ${{ secrets.TOKEN }}
+          TOKEN: ${{ secrets.DEPLOY_TOKEN }}
       - name: Revert binaries deployment
         run: |
           echo "Reverting binaries deployment for ${{ github.ref_name }}"
