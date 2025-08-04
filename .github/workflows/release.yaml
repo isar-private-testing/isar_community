@@ -185,3 +185,41 @@ jobs:
           gh release delete ${{ github.ref_name }} --yes || echo "Release not found or already deleted"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Revert Inspector deployment
+        run: |
+          echo "Reverting Inspector deployment for ${{ github.ref_name }}"
+          git clone https://x-access-token:${TOKEN}@github.com/isar-private-testing/inspector.git inspector_repo
+          cd inspector_repo
+          git checkout gh-pages || echo "gh-pages branch not found"
+          if [ -d "${{ github.ref_name }}" ]; then
+            rm -rf "${{ github.ref_name }}"
+            git add .
+            git config user.email "vicente.russo@gmail.com"
+            git config user.name "GitHub Actions"
+            git commit -m "Revert inspector deployment for failed release ${{ github.ref_name }}" || echo "No changes to commit"
+            git push origin gh-pages
+            echo "Inspector deployment reverted"
+          else
+            echo "Inspector folder ${{ github.ref_name }} not found, nothing to revert"
+          fi
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+      - name: Revert binaries deployment
+        run: |
+          echo "Reverting binaries deployment for ${{ github.ref_name }}"
+          git clone https://x-access-token:${DEPLOY_TOKEN}@github.com/isar-private-testing/binaries.git binaries_repo
+          cd binaries_repo
+          git checkout main || git checkout -b main
+          if [ -d "${{ github.ref_name }}" ]; then
+            rm -rf "${{ github.ref_name }}"
+            git add .
+            git config user.email "vicente.russo@gmail.com"
+            git config user.name "GitHub Actions"
+            git commit -m "Revert binaries for failed release ${{ github.ref_name }}" || echo "No changes to commit"
+            git push origin main
+            echo "Binaries deployment reverted"
+          else
+            echo "Binaries folder ${{ github.ref_name }} not found, nothing to revert"
+          fi
+        env:
+          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
