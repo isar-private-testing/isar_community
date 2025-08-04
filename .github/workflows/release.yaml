@@ -176,6 +176,7 @@ jobs:
     needs: [build_binaries, testlab, build_inspector, upload_to_repo]
     if: always() && contains(needs.*.result, 'failure')
     steps:
+      - uses: actions/checkout@v4
       - name: Delete release on failure
         run: |
           echo "One or more jobs failed. Deleting release ${{ github.ref_name }}"
