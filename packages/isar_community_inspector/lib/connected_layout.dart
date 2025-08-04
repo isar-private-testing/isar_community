@@ -94,11 +94,11 @@ class _ConnectedLayoutState extends State<ConnectedLayout> {
                   schema.name: schema,
                   for (final embedded in schema.embeddedSchemas.values) ...{
                     embedded.name: embedded,
-                  }
-                }
+                  },
+                },
               },
             ),
-          )
+          ),
         ],
       ),
     );

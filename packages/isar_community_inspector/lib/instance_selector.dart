@@ -63,7 +63,7 @@ class _InstanceSelectorState extends State<InstanceSelector>
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const SizedBox(height: 10),
-                    for (var instance in widget.instances)
+                    for (final instance in widget.instances)
                       if (instance != widget.selectedInstance)
                         InstanceButton(
                           instance: instance,
@@ -189,14 +189,14 @@ class SelectedInstanceButton extends StatelessWidget {
                       style: theme.textTheme.bodyMedium!.copyWith(
                         color: theme.colorScheme.onSecondaryContainer,
                       ),
-                    )
+                    ),
                   ],
                 ),
                 const Spacer(),
                 if (hasMultiple)
-                  Column(
+                  const Column(
                     mainAxisSize: MainAxisSize.min,
-                    children: const [
+                    children: [
                       Icon(
                         FontAwesomeIcons.chevronUp,
                         size: 12,
