@@ -175,6 +175,8 @@ jobs:
     runs-on: ubuntu-24.04
     needs: [build_binaries, testlab, build_inspector, upload_to_repo]
     if: always() && contains(needs.*.result, 'failure')
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - name: Delete release on failure
