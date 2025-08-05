@@ -41,6 +41,18 @@ jobs:
           mkdir deploy
           mkdir deploy/v3
           mv v3-docs/* deploy/v3/
+          # Adds the redirect to /v3
+          cat > deploy/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta http-equiv="refresh" content="0; url=/v3/">
+          </head>
+          <body>
+            <p>Redirecting to <a href="/v3/">documentation</a>...</p>
+          </body>
+          </html>
+          EOF
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
