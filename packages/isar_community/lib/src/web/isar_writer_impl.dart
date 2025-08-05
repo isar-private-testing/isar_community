@@ -13,7 +13,7 @@ class IsarWriterImpl implements IsarWriter {
   @tryInline
   @override
   void writeBool(int offset, bool? value) {
-    final number = value == true
+    final number = value ?? false
         ? 1
         : value == false
             ? 0
@@ -96,7 +96,7 @@ class IsarWriterImpl implements IsarWriter {
         ?.map(
           (e) => e == false
               ? 0
-              : e == true
+              : e ?? false
                   ? 1
                   : nullNumber,
         )

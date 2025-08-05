@@ -116,7 +116,7 @@ void main() {
               null,
               NModel(
                 EModel('hello'),
-              )
+              ),
             ],
           ),
         ),

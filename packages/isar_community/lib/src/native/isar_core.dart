@@ -98,7 +98,8 @@ void _initializePath(String? libraryPath) {
   if (coreVersion != Isar.version && coreVersion != 'debug') {
     throw IsarError(
       'Incorrect Isar Core version: Required ${Isar.version} found '
-      '$coreVersion. Make sure to use the latest isar_community_flutter_libs. If you '
+      '$coreVersion. Make sure to use the latest '
+      'isar_community_flutter_libs. If you '
       'have a Dart only project, make sure that old Isar Core binaries are '
       'deleted.',
     );

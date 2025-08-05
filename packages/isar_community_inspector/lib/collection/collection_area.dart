@@ -165,7 +165,7 @@ class _CollectionAreaState extends State<CollectionArea> {
                     IconButton(
                       icon: Icon(
                         Icons.add_rounded,
-                        color: theme.colorScheme.onBackground,
+                        color: theme.colorScheme.onSurface,
                       ),
                       iconSize: 26,
                       tooltip: 'Create Object',
@@ -175,7 +175,7 @@ class _CollectionAreaState extends State<CollectionArea> {
                     IconButton(
                       icon: Icon(
                         Icons.paste_rounded,
-                        color: theme.colorScheme.onBackground,
+                        color: theme.colorScheme.onSurface,
                       ),
                       iconSize: 20,
                       tooltip: 'Import JSON from clipboard',
@@ -185,7 +185,7 @@ class _CollectionAreaState extends State<CollectionArea> {
                     IconButton(
                       icon: Icon(
                         Icons.download_rounded,
-                        color: theme.colorScheme.onBackground,
+                        color: theme.colorScheme.onSurface,
                       ),
                       tooltip: 'Download All',
                       onPressed: _onDownload,
@@ -194,17 +194,17 @@ class _CollectionAreaState extends State<CollectionArea> {
                     IconButton(
                       icon: Icon(
                         Icons.delete_forever_rounded,
-                        color: theme.colorScheme.onBackground,
+                        color: theme.colorScheme.onSurface,
                       ),
                       tooltip: 'Delete All',
                       onPressed: _onDeleteAll,
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ],
-        )
+        ),
       ],
     );
   }
@@ -239,7 +239,7 @@ class _CollectionAreaState extends State<CollectionArea> {
       widget.instance,
       widget.collection,
       [
-        {idName: randomId}
+        {idName: randomId},
       ],
     );
     if (!mounted) return;
@@ -264,13 +264,17 @@ class _CollectionAreaState extends State<CollectionArea> {
       }
       await widget.client.importJson(widget.instance, widget.collection, json);
     } on PlatformException {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Could not access clipboard.')),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Could not access clipboard.')),
+        );
+      }
     } on FormatException {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Invalid JSON in clipboard.')),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Invalid JSON in clipboard.')),
+        );
+      }
     }
   }
 

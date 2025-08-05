@@ -77,7 +77,7 @@ void main() {
         await col.putAll(
           [
             obj7, objNull3, obj4, obj1, objNull1, obj9, //
-            obj3, obj5, objNull2, obj2, obj8, obj6 //
+            obj3, obj5, objNull2, obj2, obj8, obj6, //
           ],
         );
       });
@@ -88,14 +88,14 @@ void main() {
         isar.models.where().anyValue1Value2Value3(),
         [
           objNull1, objNull2, objNull3, obj1, obj2, //
-          obj3, obj4, obj5, obj6, obj7, obj8, obj9 //
+          obj3, obj4, obj5, obj6, obj7, obj8, obj9, //
         ],
       );
       await qEqual(
         isar.models.where(sort: Sort.desc).anyValue1Value2Value3(),
         [
           obj9, obj8, obj7, obj6, obj5, obj4, obj3, //
-          obj2, obj1, objNull3, objNull2, objNull1 //
+          obj2, obj1, objNull3, objNull2, objNull1, //
         ],
       );
     });
@@ -117,14 +117,14 @@ void main() {
           isar.models.where().value1NotEqualToAnyValue2Value3(null),
           [
             objNull2, objNull3, obj1, obj2, //
-            obj3, obj4, obj5, obj6, obj7, obj8, obj9 //
+            obj3, obj4, obj5, obj6, obj7, obj8, obj9, //
           ],
         );
         await qEqual(
           isar.models.where().value1NotEqualToAnyValue2Value3(200),
           [
             objNull1, objNull2, objNull3, obj1, //
-            obj2, obj3, obj7, obj8, obj9 //
+            obj2, obj3, obj7, obj8, obj9, //
           ],
         );
         await qEqual(
@@ -143,7 +143,7 @@ void main() {
           isar.models.where().value1GreaterThanAnyValue2Value3(null),
           [
             objNull2, objNull3, obj1, obj2, obj3, //
-            obj4, obj5, obj6, obj7, obj8, obj9 //
+            obj4, obj5, obj6, obj7, obj8, obj9, //
           ],
         );
         await qEqual(
@@ -219,7 +219,7 @@ void main() {
           isar.models.where().value1IsNotNullAnyValue2Value3(),
           [
             objNull2, objNull3, obj1, obj2, //
-            obj3, obj4, obj5, obj6, obj7, obj8, obj9 //
+            obj3, obj4, obj5, obj6, obj7, obj8, obj9, //
           ],
         );
       });
