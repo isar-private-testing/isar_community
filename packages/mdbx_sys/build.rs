@@ -1,6 +1,8 @@
-use bindgen::callbacks::{IntKind, ParseCallbacks};
-use std::process::Command;
-use std::{env, fs, path::PathBuf};
+use bindgen::{
+    Formatter,
+    callbacks::{IntKind, ParseCallbacks},
+};
+use std::{env, path::PathBuf};
 
 #[derive(Debug)]
 struct Callbacks;
@@ -43,6 +45,11 @@ impl ParseCallbacks for Callbacks {
             | "MDBX_TOO_LARGE"
             | "MDBX_THREAD_MISMATCH"
             | "MDBX_TXN_OVERLAPPING"
+            | "MDBX_BACKLOG_DEPLETED"
+            | "MDBX_DUPLICATED_CLK"
+            | "MDBX_DANGLING_DBI"
+            | "MDBX_OUSTED"
+            | "MDBX_MVCC_RETARDED"
             | "MDBX_LAST_ERRCODE" => Some(IntKind::Int),
             _ => Some(IntKind::UInt),
         }
@@ -50,7 +57,7 @@ impl ParseCallbacks for Callbacks {
 }
 
 const LIBMDBX_REPO: &str = "https://github.com/isar-community/libmdbx.git";
-const LIBMDBX_BRANCH: &str = "archive/0.12";
+const LIBMDBX_BRANCH: &str = "stable";
 
 fn main() {
     println!("cargo:rerun-if-changed=build.rs");
@@ -78,23 +85,6 @@ fn main() {
     mdbx.push("libmdbx");
     mdbx.push("dist");
 
-    let core_path = mdbx.join("mdbx.c");
-    let mut core = fs::read_to_string(core_path.as_path()).unwrap();
-    core = core.replace("!CharToOemBuffA(buf, buf, size)", "false");
-    if is_android {
-        core = core.replace(
-            "memset(ior, -1, sizeof(osal_ioring_t))",
-            "memset(ior, 0, sizeof(osal_ioring_t))",
-        );
-        core = core.replace("unlikely(linux_kernel_version < 0x04000000)", "false");
-        core = core.replace(
-            "assert(linux_kernel_version >= 0x03060000);",
-            "if (linux_kernel_version >= 0x03060000) return MDBX_SUCCESS;
-            __fallthrough",
-        );
-    }
-    fs::write(core_path.as_path(), core).unwrap();
-
     let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
 
     let bindings = bindgen::Builder::default()
@@ -102,15 +92,14 @@ fn main() {
         .allowlist_var("^(MDBX|mdbx)_.*")
         .allowlist_type("^(MDBX|mdbx)_.*")
         .allowlist_function("^(MDBX|mdbx)_.*")
-        .rustified_enum("^(MDBX_option_t|MDBX_cursor_op)")
-        .size_t_is_usize(false)
+        .size_t_is_usize(true)
         .ctypes_prefix("::libc")
         .parse_callbacks(Box::new(Callbacks))
         .layout_tests(false)
         .prepend_enum_name(false)
         .generate_comments(true)
         .disable_header_comment()
-        .rustfmt_bindings(true)
+        .formatter(Formatter::None)
         .generate()
         .expect("Unable to generate bindings");
 
@@ -119,50 +108,37 @@ fn main() {
         .expect("Couldn't write bindings!");
 
     let mut cc_builder = cc::Build::new();
-    let flags = format!("{:?}", cc_builder.get_compiler().cflags_env());
-    cc_builder.flag_if_supported("-Wno-everything");
+    cc_builder
+        .flag_if_supported("-Wall")
+        .flag_if_supported("-Werror")
+        .flag_if_supported("-ffunction-sections")
+        .flag_if_supported("-fvisibility=hidden")
+        .flag_if_supported("-Wno-error=attributes");
+
+    let flags = format!(
+        "\"-NDEBUG={} {}\"",
+        u8::from(!cfg!(debug_assertions)),
+        cc_builder
+            .get_compiler()
+            .cflags_env()
+            .to_str()
+            .unwrap()
+            .trim()
+    );
+
+    cc_builder
+        .define("MDBX_BUILD_FLAGS", flags.as_str())
+        .define("MDBX_TXN_CHECKOWNER", "0");
+
+    // __cpu_model is not available in musl
+    if env::var("TARGET").unwrap().ends_with("-musl") {
+        cc_builder.define("MDBX_HAVE_BUILTIN_CPU_SUPPORTS", "0");
+    }
 
     if cfg!(windows) {
-        let dst = cmake::Config::new(&mdbx)
-            .define("MDBX_INSTALL_STATIC", "1")
-            .define("MDBX_BUILD_CXX", "0")
-            .define("MDBX_BUILD_TOOLS", "0")
-            .define("MDBX_BUILD_SHARED_LIBRARY", "0")
-            .define("MDBX_LOCK_SUFFIX", "\".lock\"")
-            .define("MDBX_TXN_CHECKOWNER", "0")
-            .define("MDBX_WITHOUT_MSVC_CRT", "1")
-            // Setting HAVE_LIBM=1 is necessary to override issues with `pow` detection on Windows
-            .define("UNICODE", "1")
-            .define("HAVE_LIBM", "1")
-            .define("NDEBUG", "1")
-            .define("CMAKE_EXE_LINKER_FLAGS", "/DEFAULTLIB:advapi32.lib")
-            .define("CMAKE_SHARED_LINKER_FLAGS", "/DEFAULTLIB:advapi32.lib")
-            .cflag("/w")
-            .init_c_cfg(cc_builder)
-            .build();
-
-        println!("cargo:rustc-link-lib=mdbx");
-        println!(
-            "cargo:rustc-link-search=native={}",
-            dst.join("lib").display()
-        );
-        println!(r"cargo:rustc-link-lib=ntdll");
-        println!(r"cargo:rustc-link-lib=advapi32");
-        println!(r"cargo:rustc-link-lib=user32");
-        println!(r"cargo:rustc-link-lib=kernel32");
-        println!(r"cargo:rustc-link-search=C:\windows\system32");
-    } else {
-        cc_builder
-            .define("MDBX_BUILD_FLAGS", flags.as_str())
-            .define("MDBX_BUILD_CXX", "0")
-            .define("MDBX_BUILD_TOOLS", "0")
-            .define("MDBX_BUILD_SHARED_LIBRARY", "0")
-            .define("MDBX_LOCK_SUFFIX", "\".lock\"")
-            .define("MDBX_TXN_CHECKOWNER", "0")
-            .define("MDBX_OSX_SPEED_INSTEADOF_DURABILITY", "1")
-            .define("MDBX_HAVE_BUILTIN_CPU_SUPPORTS", "0")
-            .define("NDEBUG", "1")
-            .file(mdbx.join("mdbx.c"))
-            .compile("libmdbx.a");
+        println!(r"cargo:rustc-link-lib=dylib=ntdll");
+        println!(r"cargo:rustc-link-lib=dylib=user32");
     }
+
+    cc_builder.file(mdbx.join("mdbx.c")).compile("libmdbx.a");
 }
