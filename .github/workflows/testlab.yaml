@@ -11,6 +11,8 @@ jobs:
           flutter-version: ${{ vars.FLUTTER_VERSION }}
       - name: Prepare Build
         uses: ./.github/actions/prepare-build
+      - name: Display Rust version
+        run: rustc --version && cargo --version
       - name: Build Isar Core arm64
         run: |
           bash tool/build_android.sh arm64
