@@ -1,11 +1,15 @@
 #!/bin/bash
 
-# Definir a toolchain específica
-RUST_TOOLCHAIN="1.88.0-x86_64-unknown-linux-gnu"
+
+# Definir a toolchain específica para macOS
+RUST_TOOLCHAIN="1.88.0-x86_64-apple-darwin"
+
+# Instalar a toolchain se não existir
+rustup toolchain install $RUST_TOOLCHAIN
 
 echo "Building for macOS"
-rustc --version
-cargo --version
+rustup run $RUST_TOOLCHAIN rustc --version
+rustup run $RUST_TOOLCHAIN cargo --version
 rustup target add aarch64-apple-darwin x86_64-apple-darwin --toolchain $RUST_TOOLCHAIN
 rustup run $RUST_TOOLCHAIN cargo build --target aarch64-apple-darwin --release
 rustup run $RUST_TOOLCHAIN cargo build --target x86_64-apple-darwin --release

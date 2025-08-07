@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# Definir a toolchain específica
-RUST_TOOLCHAIN="1.88.0-x86_64-unknown-linux-gnu"
+# Definir a toolchain específica para macOS
+RUST_TOOLCHAIN="1.88.0-x86_64-apple-darwin"
+
+# Instalar a toolchain se não existir
+rustup toolchain install $RUST_TOOLCHAIN
 
 export IPHONEOS_DEPLOYMENT_TARGET=12.0
 echo "Building for iOS"
