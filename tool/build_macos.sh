@@ -1,12 +1,13 @@
-export MACOSX_DEPLOYMENT_TARGET=10.11
+#!/bin/bash
+
+# Definir a toolchain específica
+RUST_TOOLCHAIN="1.88.0-x86_64-unknown-linux-gnu"
 
 echo "Building for macOS"
 rustc --version
 cargo --version
-
-rustup target add aarch64-apple-darwin x86_64-apple-darwin
-cargo build --target aarch64-apple-darwin --release
-cargo build --target x86_64-apple-darwin --release
-
+rustup target add aarch64-apple-darwin x86_64-apple-darwin --toolchain $RUST_TOOLCHAIN
+rustup run $RUST_TOOLCHAIN cargo build --target aarch64-apple-darwin --release
+rustup run $RUST_TOOLCHAIN cargo build --target x86_64-apple-darwin --release
 lipo "target/aarch64-apple-darwin/release/libisar.dylib" "target/x86_64-apple-darwin/release/libisar.dylib" -output "libisar_macos.dylib" -create
 install_name_tool -id @rpath/libisar.dylib libisar_macos.dylib
