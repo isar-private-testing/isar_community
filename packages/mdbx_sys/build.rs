@@ -61,7 +61,9 @@ const LIBMDBX_BRANCH: &str = "stable";
 
 fn main() {
     println!("cargo:rerun-if-changed=build.rs");
-    env::set_var("IPHONEOS_DEPLOYMENT_TARGET", "12.0");
+    unsafe {
+        env::set_var("IPHONEOS_DEPLOYMENT_TARGET", "12.0");
+    }
 
     let is_android = env::var("CARGO_CFG_TARGET_OS").unwrap() == "android";
 
