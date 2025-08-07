@@ -2,7 +2,7 @@ use bindgen::{
     Formatter,
     callbacks::{IntKind, ParseCallbacks},
 };
-use std::{env, path::PathBuf};
+use std::{env, path::PathBuf, process::Command, fs};
 
 #[derive(Debug)]
 struct Callbacks;
