@@ -1,5 +1,9 @@
 export IPHONEOS_DEPLOYMENT_TARGET=12.0
 
+echo "Building for iOS"
+rustc --version
+cargo --version
+
 rustup target add aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios
 cargo build --target aarch64-apple-ios --release
 cargo build --target aarch64-apple-ios-sim --release
