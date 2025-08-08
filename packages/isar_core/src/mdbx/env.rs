@@ -24,11 +24,9 @@ impl Env {
         let mut env: *mut ffi::MDBX_env = ptr::null_mut();
         unsafe {
             mdbx_result(ffi::mdbx_env_create(&mut env))?;
-            mdbx_result(ffi::mdbx_env_set_option(
-                env,
-                ffi::MDBX_option_t::MDBX_opt_max_db,
-                max_dbs,
-            ))?;
+            // Set maximum number of DBs; use direct API to avoid enum
+            // differences between libmdbx versions (0.12 vs 0.13).
+            mdbx_result(ffi::mdbx_env_set_maxdbs(env, max_dbs as u32))?;
 
             let mut flags = ffi::MDBX_NOTLS | ffi::MDBX_COALESCE | ffi::MDBX_NOSUBDIR;
             if relaxed_durability {
