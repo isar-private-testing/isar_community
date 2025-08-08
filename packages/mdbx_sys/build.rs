@@ -56,8 +56,8 @@ impl ParseCallbacks for Callbacks {
     }
 }
 
-const LIBMDBX_REPO: &str = "https://github.com/isar-community/libmdbx.git";
-const LIBMDBX_BRANCH: &str = "stable";
+const LIBMDBX_REPO: &str = "https://github.com/erthink/libmdbx.git";
+const LIBMDBX_TAG: &str = "v0.13.7";
 
 fn main() {
     println!("cargo:rerun-if-changed=build.rs");
@@ -65,7 +65,7 @@ fn main() {
         env::set_var("IPHONEOS_DEPLOYMENT_TARGET", "12.0");
     }
 
-    let is_android = env::var("CARGO_CFG_TARGET_OS").unwrap() == "android";
+    let _is_android = env::var("CARGO_CFG_TARGET_OS").unwrap() == "android";
 
     let _ = fs::remove_dir_all("libmdbx");
 
@@ -73,7 +73,7 @@ fn main() {
         .arg("clone")
         .arg(LIBMDBX_REPO)
         .arg("--branch")
-        .arg(LIBMDBX_BRANCH)
+        .arg(LIBMDBX_TAG)
         .output()
         .unwrap();
 
@@ -102,6 +102,8 @@ fn main() {
         .generate_comments(true)
         .disable_header_comment()
         .formatter(Formatter::None)
+        // Ensure enums are generated with variants, not bare integers
+        .rustified_enum("^(MDBX_option_t|MDBX_cursor_op)")
         .generate()
         .expect("Unable to generate bindings");
 
