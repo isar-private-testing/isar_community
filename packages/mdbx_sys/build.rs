@@ -118,10 +118,14 @@ fn main() {
         .flag_if_supported("-Werror")
         .flag_if_supported("-ffunction-sections")
         .flag_if_supported("-Wno-error=attributes");
-    // Avoid hiding C symbols on Apple targets; otherwise lib ends up with no exported symbols
+    // Avoid hiding C symbols on Apple targets; otherwise the resulting archive may have no exported symbols
     if target.contains("apple") {
         cc_builder.flag("-fvisibility=default");
+        // Over-expose public API on Apple to avoid missing _mdbx_* during initial bring-up
         cc_builder.define("MDBX_BUILD_SHARED_LIBRARY", "1");
+        cc_builder.define("MDBX_BUILD_DLLEXPORT", "1");
+        // Force-load all objects from static archives when linking the final dylib
+        println!("cargo:rustc-link-arg=-Wl,-all_load");
     } else {
         cc_builder.flag_if_supported("-fvisibility=hidden");
     }
@@ -144,9 +148,7 @@ fn main() {
 
     cc_builder
         .define("MDBX_BUILD_FLAGS", flags.as_str())
-        .define("MDBX_TXN_CHECKOWNER", "0")
-        // Ensure public API symbols are exported from static lib on Apple
-        .define("MDBX_BUILD_DLLEXPORT", "1");
+        .define("MDBX_TXN_CHECKOWNER", "0");
 
     // Android-specific tweaks: disable builtin CPU feature probes and PID checks
     if is_android {
@@ -166,5 +168,6 @@ fn main() {
         println!(r"cargo:rustc-link-lib=dylib=advapi32");
     }
 
-    cc_builder.file(mdbx.join("mdbx.c")).compile("libmdbx.a");
+    // Build static lib with a canonical name so Cargo links it correctly across platforms
+    cc_builder.file(mdbx.join("mdbx.c")).compile("mdbx");
 }
