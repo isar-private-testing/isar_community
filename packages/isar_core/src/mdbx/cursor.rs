@@ -19,7 +19,17 @@ impl UnboundCursor {
 
     pub fn bind<'txn>(self, txn: &'txn Txn, db: Db) -> Result<Cursor<'txn>> {
         unsafe {
-            mdbx_result(ffi::mdbx_cursor_bind(txn.txn, self.cursor, db.dbi))?;
+            // Prefer direct open if available; else fall back to bind.
+            // mdbx_cursor_open(txn, dbi, &mut cursor)
+            let mut cur = self.cursor;
+            let rc = ffi::mdbx_cursor_open(txn.txn, db.dbi, &mut cur);
+            if rc == ffi::MDBX_ENOSYS || rc == ffi::MDBX_ENOTSUP {
+                mdbx_result(ffi::mdbx_cursor_bind(txn.txn, self.cursor, db.dbi))?;
+            } else {
+                mdbx_result(rc)?;
+                // replace handle if open moved it
+                self.cursor = cur;
+            }
         }
 
         Ok(Cursor {

@@ -78,15 +78,8 @@ fn main() {
         .output()
         .unwrap();
 
-    Command::new("make")
-        .arg("dist")
-        .current_dir("libmdbx")
-        .output()
-        .unwrap();
-
     let mut mdbx = PathBuf::from(&env::var("CARGO_MANIFEST_DIR").unwrap());
     mdbx.push("libmdbx");
-    mdbx.push("dist");
 
     let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
 
@@ -121,11 +114,6 @@ fn main() {
     // Avoid hiding C symbols on Apple targets; otherwise the resulting archive may have no exported symbols
     if target.contains("apple") {
         cc_builder.flag("-fvisibility=default");
-        // Over-expose public API on Apple to avoid missing _mdbx_* during initial bring-up
-        cc_builder.define("MDBX_BUILD_SHARED_LIBRARY", "1");
-        cc_builder.define("MDBX_BUILD_DLLEXPORT", "1");
-        // Force-load all objects from static archives when linking the final dylib
-        println!("cargo:rustc-link-arg=-Wl,-all_load");
     } else {
         cc_builder.flag_if_supported("-fvisibility=hidden");
     }
