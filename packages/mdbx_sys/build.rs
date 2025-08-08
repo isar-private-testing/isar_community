@@ -119,7 +119,10 @@ fn main() {
         .flag_if_supported("-ffunction-sections")
         .flag_if_supported("-Wno-error=attributes");
     // Avoid hiding C symbols on Apple targets; otherwise lib ends up with no exported symbols
-    if !target.contains("apple") {
+    if target.contains("apple") {
+        cc_builder.flag("-fvisibility=default");
+        cc_builder.define("MDBX_BUILD_SHARED_LIBRARY", "1");
+    } else {
         cc_builder.flag_if_supported("-fvisibility=hidden");
     }
 
