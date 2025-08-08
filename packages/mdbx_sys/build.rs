@@ -65,7 +65,8 @@ fn main() {
         env::set_var("IPHONEOS_DEPLOYMENT_TARGET", "12.0");
     }
 
-    let _is_android = env::var("CARGO_CFG_TARGET_OS").unwrap() == "android";
+    let is_android = env::var("CARGO_CFG_TARGET_OS").unwrap() == "android";
+    let target = env::var("TARGET").unwrap_or_default();
 
     let _ = fs::remove_dir_all("libmdbx");
 
@@ -116,8 +117,16 @@ fn main() {
         .flag_if_supported("-Wall")
         .flag_if_supported("-Werror")
         .flag_if_supported("-ffunction-sections")
-        .flag_if_supported("-fvisibility=hidden")
         .flag_if_supported("-Wno-error=attributes");
+    // Avoid hiding C symbols on Apple targets; otherwise lib ends up with no exported symbols
+    if !target.contains("apple") {
+        cc_builder.flag_if_supported("-fvisibility=hidden");
+    }
+
+    // Ensure position independent code for linking into shared libs (Android i686 needs this)
+    if !cfg!(windows) {
+        cc_builder.pic(true);
+    }
 
     let flags = format!(
         "\"-NDEBUG={} {}\"",
@@ -134,14 +143,22 @@ fn main() {
         .define("MDBX_BUILD_FLAGS", flags.as_str())
         .define("MDBX_TXN_CHECKOWNER", "0");
 
+    // Android-specific tweaks: disable builtin CPU feature probes and PID checks
+    if is_android {
+        cc_builder.define("MDBX_HAVE_BUILTIN_CPU_SUPPORTS", "0");
+        cc_builder.define("MDBX_ENV_CHECKPID", "0");
+    }
+
     // __cpu_model is not available in musl
-    if env::var("TARGET").unwrap().ends_with("-musl") {
+    if target.ends_with("-musl") {
         cc_builder.define("MDBX_HAVE_BUILTIN_CPU_SUPPORTS", "0");
     }
 
     if cfg!(windows) {
         println!(r"cargo:rustc-link-lib=dylib=ntdll");
         println!(r"cargo:rustc-link-lib=dylib=user32");
+        // Required by registry and CryptoAPI functions used by libmdbx
+        println!(r"cargo:rustc-link-lib=dylib=advapi32");
     }
 
     cc_builder.file(mdbx.join("mdbx.c")).compile("libmdbx.a");
