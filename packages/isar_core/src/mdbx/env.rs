@@ -27,7 +27,7 @@ impl Env {
             // Set maximum number of DBs via options API (stable across 0.12/0.13)
             mdbx_result(ffi::mdbx_env_set_option(
                 env,
-                ffi::MDBX_option_t::MDBX_opt_max_dbi,
+                ffi::MDBX_opt_max_db,
                 max_dbs as u64,
             ))?;
 

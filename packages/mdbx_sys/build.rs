@@ -102,8 +102,8 @@ fn main() {
         .generate_comments(true)
         .disable_header_comment()
         .formatter(Formatter::None)
-        // Ensure enums are generated with variants, not bare integers
-        .rustified_enum("^(MDBX_option_t|MDBX_cursor_op)")
+        // Ensure cursor ops are generated with variants; leave options as consts for cross-platform stability
+        .rustified_enum("^MDBX_cursor_op$")
         .generate()
         .expect("Unable to generate bindings");
 
