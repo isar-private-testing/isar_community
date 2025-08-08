@@ -141,7 +141,9 @@ fn main() {
 
     cc_builder
         .define("MDBX_BUILD_FLAGS", flags.as_str())
-        .define("MDBX_TXN_CHECKOWNER", "0");
+        .define("MDBX_TXN_CHECKOWNER", "0")
+        // Ensure public API symbols are exported from static lib on Apple
+        .define("MDBX_BUILD_DLLEXPORT", "1");
 
     // Android-specific tweaks: disable builtin CPU feature probes and PID checks
     if is_android {
