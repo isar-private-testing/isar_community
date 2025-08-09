@@ -2,7 +2,7 @@ use bindgen::{
     Formatter,
     callbacks::{IntKind, ParseCallbacks},
 };
-use std::{env, path::PathBuf, process::Command, fs};
+use std::{env, path::PathBuf};
 
 #[derive(Debug)]
 struct Callbacks;
@@ -56,34 +56,9 @@ impl ParseCallbacks for Callbacks {
     }
 }
 
-// If a local copy is vendored, prefer it to avoid network access.
-// Expected local path: ../../vorots-repository/libmdbx-rs/mdbx-sys/libmdbx
-
 fn main() {
-    println!("cargo:rerun-if-changed=build.rs");
-    unsafe {
-        env::set_var("IPHONEOS_DEPLOYMENT_TARGET", "12.0");
-    }
-
-    let is_android = env::var("CARGO_CFG_TARGET_OS").unwrap() == "android";
-    let target = env::var("TARGET").unwrap_or_default();
-
-    // Resolve libmdbx source dir, preferring vendored local copy
-    let manifest_dir = PathBuf::from(&env::var("CARGO_MANIFEST_DIR").unwrap());
-    let vendored = manifest_dir
-        .join("../../vorots-repository/libmdbx-rs/mdbx-sys/libmdbx")
-        .canonicalize()
-        .ok();
-    let mdbx = if let Some(v) = vendored {
-        v
-    } else {
-        // fallback to sibling libmdbx if present
-        let fallback = manifest_dir.join("libmdbx");
-        if !fallback.exists() {
-            panic!("Missing libmdbx sources. Place them at vorots-repository/libmdbx-rs/mdbx-sys/libmdbx or packages/mdbx_sys/libmdbx");
-        }
-        fallback
-    };
+    let mut mdbx = PathBuf::from(&env::var("CARGO_MANIFEST_DIR").unwrap());
+    mdbx.push("libmdbx");
 
     let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
 
@@ -97,11 +72,9 @@ fn main() {
         .parse_callbacks(Box::new(Callbacks))
         .layout_tests(false)
         .prepend_enum_name(false)
-        .generate_comments(true)
+        .generate_comments(false)
         .disable_header_comment()
         .formatter(Formatter::None)
-        // Ensure cursor ops are generated with variants; leave options as consts for cross-platform stability
-        .rustified_enum("^MDBX_cursor_op$")
         .generate()
         .expect("Unable to generate bindings");
 
@@ -109,23 +82,16 @@ fn main() {
         .write_to_file(out_path.join("bindings.rs"))
         .expect("Couldn't write bindings!");
 
+    let mut mdbx = PathBuf::from(&env::var("CARGO_MANIFEST_DIR").unwrap());
+    mdbx.push("libmdbx");
+
     let mut cc_builder = cc::Build::new();
     cc_builder
         .flag_if_supported("-Wall")
         .flag_if_supported("-Werror")
         .flag_if_supported("-ffunction-sections")
+        .flag_if_supported("-fvisibility=hidden")
         .flag_if_supported("-Wno-error=attributes");
-    // Avoid hiding C symbols on Apple targets; otherwise the resulting archive may have no exported symbols
-    if target.contains("apple") {
-        cc_builder.flag("-fvisibility=default");
-    } else {
-        cc_builder.flag_if_supported("-fvisibility=hidden");
-    }
-
-    // Ensure position independent code for linking into shared libs (Android i686 needs this)
-    if !cfg!(windows) {
-        cc_builder.pic(true);
-    }
 
     let flags = format!(
         "\"-NDEBUG={} {}\"",
@@ -142,24 +108,15 @@ fn main() {
         .define("MDBX_BUILD_FLAGS", flags.as_str())
         .define("MDBX_TXN_CHECKOWNER", "0");
 
-    // Android-specific tweaks: disable builtin CPU feature probes and PID checks
-    if is_android {
-        cc_builder.define("MDBX_HAVE_BUILTIN_CPU_SUPPORTS", "0");
-        cc_builder.define("MDBX_ENV_CHECKPID", "0");
-    }
-
     // __cpu_model is not available in musl
-    if target.ends_with("-musl") {
+    if env::var("TARGET").unwrap().ends_with("-musl") {
         cc_builder.define("MDBX_HAVE_BUILTIN_CPU_SUPPORTS", "0");
     }
 
     if cfg!(windows) {
         println!(r"cargo:rustc-link-lib=dylib=ntdll");
         println!(r"cargo:rustc-link-lib=dylib=user32");
-        // Required by registry and CryptoAPI functions used by libmdbx
-        println!(r"cargo:rustc-link-lib=dylib=advapi32");
     }
 
-    // Build static lib with a canonical name so Cargo links it correctly across platforms
-    cc_builder.file(mdbx.join("mdbx.c")).compile("mdbx");
+    cc_builder.file(mdbx.join("mdbx.c")).compile("libmdbx.a");
 }
