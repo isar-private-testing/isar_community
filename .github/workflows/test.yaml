@@ -213,7 +213,7 @@ jobs:
         run: sh tool/prepare_tests.sh
       - name: Run Flutter Integration tests
         continue-on-error: true
-        timeout-minutes: ${{ inputs.timeout_minutes }}
+        timeout-minutes: 30
         uses: Wandalen/wretry.action@v1.0.36
         with:
           action: reactivecircus/android-emulator-runner@v2
