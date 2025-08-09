@@ -93,6 +93,14 @@ fn main() {
         .flag_if_supported("-fvisibility=hidden")
         .flag_if_supported("-Wno-error=attributes");
 
+    let target = env::var("TARGET").unwrap_or_default();
+    let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap_or_default();
+
+    // Ensure position-independent code for shared linking (Android x86/x64 needs this)
+    if !target.contains("windows") {
+        cc_builder.pic(true);
+    }
+
     let flags = format!(
         "\"-NDEBUG={} {}\"",
         u8::from(!cfg!(debug_assertions)),
@@ -109,14 +117,24 @@ fn main() {
         .define("MDBX_TXN_CHECKOWNER", "0");
 
     // __cpu_model is not available in musl
-    if env::var("TARGET").unwrap().ends_with("-musl") {
+    if target.ends_with("-musl") {
         cc_builder.define("MDBX_HAVE_BUILTIN_CPU_SUPPORTS", "0");
     }
 
-    if cfg!(windows) {
+    // Android-specific tweaks
+    if target_os == "android" {
+        // Avoid builtin CPU probes and PID checks on Android
+        cc_builder.define("MDBX_HAVE_BUILTIN_CPU_SUPPORTS", "0");
+        cc_builder.define("MDBX_ENV_CHECKPID", "0");
+    }
+
+    if target.contains("windows") {
         println!(r"cargo:rustc-link-lib=dylib=ntdll");
         println!(r"cargo:rustc-link-lib=dylib=user32");
+        // Required by registry and CryptoAPI functions used by libmdbx
+        println!(r"cargo:rustc-link-lib=dylib=advapi32");
     }
 
     cc_builder.file(mdbx.join("mdbx.c")).compile("libmdbx.a");
 }
+
