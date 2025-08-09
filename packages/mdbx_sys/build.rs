@@ -56,8 +56,8 @@ impl ParseCallbacks for Callbacks {
     }
 }
 
-const LIBMDBX_REPO: &str = "https://github.com/erthink/libmdbx.git";
-const LIBMDBX_TAG: &str = "v0.13.7";
+// If a local copy is vendored, prefer it to avoid network access.
+// Expected local path: ../../vorots-repository/libmdbx-rs/mdbx-sys/libmdbx
 
 fn main() {
     println!("cargo:rerun-if-changed=build.rs");
@@ -68,18 +68,22 @@ fn main() {
     let is_android = env::var("CARGO_CFG_TARGET_OS").unwrap() == "android";
     let target = env::var("TARGET").unwrap_or_default();
 
-    let _ = fs::remove_dir_all("libmdbx");
-
-    Command::new("git")
-        .arg("clone")
-        .arg(LIBMDBX_REPO)
-        .arg("--branch")
-        .arg(LIBMDBX_TAG)
-        .output()
-        .unwrap();
-
-    let mut mdbx = PathBuf::from(&env::var("CARGO_MANIFEST_DIR").unwrap());
-    mdbx.push("libmdbx");
+    // Resolve libmdbx source dir, preferring vendored local copy
+    let manifest_dir = PathBuf::from(&env::var("CARGO_MANIFEST_DIR").unwrap());
+    let vendored = manifest_dir
+        .join("../../vorots-repository/libmdbx-rs/mdbx-sys/libmdbx")
+        .canonicalize()
+        .ok();
+    let mdbx = if let Some(v) = vendored {
+        v
+    } else {
+        // fallback to sibling libmdbx if present
+        let fallback = manifest_dir.join("libmdbx");
+        if !fallback.exists() {
+            panic!("Missing libmdbx sources. Place them at vorots-repository/libmdbx-rs/mdbx-sys/libmdbx or packages/mdbx_sys/libmdbx");
+        }
+        fallback
+    };
 
     let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
 
