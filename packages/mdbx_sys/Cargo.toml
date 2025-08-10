@@ -1,15 +1,21 @@
-###############################################
-# Redirect this crate to Vorot's implementation
-###############################################
-
 [package]
-name = "mdbx-sys-proxy"
-version = "0.0.0"
+name = "mdbx-sys"
+version = "13.7.0"
 edition = "2021"
+license = "MPL-2.0"
+description = "Rust bindings for libmdbx."
+documentation = "https://docs.rs/mdbx-sys"
+homepage = "https://github.com/vorot93/libmdbx-rs"
+repository = "https://github.com/vorot93/libmdbx-rs"
+keywords = ["MDBX", "database", "storage-engine", "bindings", "library"]
+categories = ["database", "external-ffi-bindings"]
 
 [lib]
-name = "mdbx_sys_proxy"
-path = "src/lib.rs"
+name = "mdbx_sys"
 
 [dependencies]
-mdbx-sys = { package = "mdbx-sys", path = "../../vorots-repository/libmdbx-rs/mdbx-sys" }
+libc = "0.2"
+
+[build-dependencies]
+cc = "1.0"
+bindgen = { version = "0.72", default-features = false, features = ["runtime"] }
