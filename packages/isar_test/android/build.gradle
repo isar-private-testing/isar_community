@@ -18,14 +18,6 @@ subprojects {
     project.evaluationDependsOn(":app")
 }
 
-android {
-    namespace 'dev.isar.isar_test'
-    compileSdkVersion 35
-
-    defaultConfig {
-        minSdkVersion 23
-    }
-}
 
 
 tasks.register("clean", Delete) {
