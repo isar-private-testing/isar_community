@@ -1,20 +1,38 @@
+group 'dev.isar.isar_test'
+version '1.0'
+
 buildscript {
-    ext.kotlin_version = '2.2.0'
     repositories {
         google()
         mavenCentral()
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:8.7.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
-allprojects {
+rootProject.allprojects {
     repositories {
         google()
         mavenCentral()
     }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    namespace 'dev.isar.isar_test'
+    compileSdkVersion 35
+
+    defaultConfig {
+        minSdkVersion 23
+    }
+}
+
+
+dependencies {
+    implementation "androidx.startup:startup-runtime:1.1.1"
 }
 
 rootProject.buildDir = '../build'
