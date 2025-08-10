@@ -201,36 +201,34 @@ fn main() {
     }
 
     let amalgamated = libmdbx_dir.join("mdbx.c");
+    let src_dir = libmdbx_dir.join("src");
+    let alloy = src_dir.join("alloy.c");
     if amalgamated.exists() {
         cc_builder.file(amalgamated);
+    } else if alloy.exists() {
+        // alloy.c is a self-amalgamated build unit; compile only it
+        cc_builder.include(&src_dir);
+        cc_builder.file(alloy);
     } else {
-        let src_dir = libmdbx_dir.join("src");
-        // Collect all .c files under src
+        // Fallback: build individual sources (rare)
         let mut files: Vec<PathBuf> = fs::read_dir(&src_dir)
             .expect("list libmdbx/src failed")
             .filter_map(|e| e.ok())
             .map(|e| e.path())
-            .filter(|p| {
-                if let Some(ext) = p.extension() { ext == "c" } else { false }
-            })
+            .filter(|p| p.extension().map(|e| e == "c").unwrap_or(false))
             .collect();
-
-        // Filter Windows vs POSIX locks
         let is_windows = target.contains("windows");
         files.retain(|p| {
             let fname = p.file_name().unwrap().to_string_lossy();
-            if fname == "version.c" { return false; } // included by alloy.c
-            if fname == "version.c.in" { return false; }
+            if fname == "version.c" || fname == "version.c.in" { return false; }
+            if fname == "alloy.c" { return false; }
             if is_windows {
-                // Keep windows, drop posix
                 if fname == "lck-posix.c" { return false; }
             } else {
-                // Keep posix, drop windows-only sources
                 if fname == "lck-windows.c" || fname == "windows-import.c" { return false; }
             }
             true
         });
-
         for f in files { cc_builder.file(f); }
     }
 
