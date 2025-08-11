@@ -1,4 +1,4 @@
-package com.example.isar_test
+package com.isar_community.isar_test
 
 import io.flutter.embedding.android.FlutterActivity
 
