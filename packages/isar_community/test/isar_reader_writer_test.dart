@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 import 'package:isar_community/src/native/isar_core.dart';
 import 'package:isar_community/src/native/isar_reader_impl.dart';
 import 'package:isar_community/src/native/isar_writer_impl.dart';

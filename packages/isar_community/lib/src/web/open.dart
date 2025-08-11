@@ -3,7 +3,7 @@
 import 'dart:html';
 //import 'dart:js_util';
 
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 /*import 'package:isar_community/src/common/schemas.dart';
 
 import 'package:isar_community/src/web/bindings.dart';

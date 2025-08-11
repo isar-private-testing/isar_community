@@ -1,4 +1,4 @@
-library isar;
+library isar_community;
 
 import 'dart:async';
 import 'dart:convert';

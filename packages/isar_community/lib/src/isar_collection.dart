@@ -1,4 +1,4 @@
-part of isar;
+part of isar_community;
 
 /// Normal keys consist of a single object, composite keys multiple.
 typedef IndexKey = List<Object?>;

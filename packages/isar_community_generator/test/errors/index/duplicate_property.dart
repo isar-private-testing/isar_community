@@ -1,6 +1,6 @@
 // composite index contains duplicate properties
 
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 
 @collection
 class Model {

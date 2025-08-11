@@ -1,5 +1,5 @@
 import 'package:dartx/dartx.dart';
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 import 'package:isar_community_generator/src/isar_type.dart';
 import 'package:isar_community_generator/src/object_info.dart';
 

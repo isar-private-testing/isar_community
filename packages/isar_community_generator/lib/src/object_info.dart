@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dartx/dartx.dart';
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 
 import 'package:xxh3/xxh3.dart';
 

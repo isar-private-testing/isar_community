@@ -3,7 +3,7 @@
 import 'dart:async';
 import 'dart:html';
 
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 
 import 'package:isar_community/src/web/bindings.dart';
 import 'package:isar_community/src/web/isar_web.dart';

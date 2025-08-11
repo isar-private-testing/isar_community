@@ -1,4 +1,4 @@
-part of isar;
+part of isar_community;
 
 /// A where clause to traverse an Isar index.
 abstract class WhereClause {

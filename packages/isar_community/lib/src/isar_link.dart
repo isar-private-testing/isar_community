@@ -1,4 +1,4 @@
-part of isar;
+part of isar_community;
 
 /// @nodoc
 @sealed

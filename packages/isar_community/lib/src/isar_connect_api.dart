@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // ignore_for_file: public_member_api_docs
 
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 
 enum ConnectAction {
   getSchema('ext.isar.getSchema'),

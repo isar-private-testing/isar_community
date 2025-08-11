@@ -1,4 +1,4 @@
-part of isar;
+part of isar_community;
 
 /// This schema represents a link to the same or another collection.
 class LinkSchema {

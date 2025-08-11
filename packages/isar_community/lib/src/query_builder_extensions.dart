@@ -1,4 +1,4 @@
-part of isar;
+part of isar_community;
 
 /// Extension for QueryBuilders.
 extension QueryWhereOr<OBJ, R> on QueryBuilder<OBJ, R, QWhereOr> {

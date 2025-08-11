@@ -8,7 +8,7 @@ import 'dart:math';
 import 'package:clickup_fading_scroll/clickup_fading_scroll.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 import 'package:isar_community_inspector/collection/button_prev_next.dart';
 import 'package:isar_community_inspector/collection/button_sort.dart';
 import 'package:isar_community_inspector/collection/objects_list_sliver.dart';

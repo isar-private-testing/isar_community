@@ -1,6 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 import 'package:isar_community_generator/src/helper.dart';
 import 'package:source_gen/source_gen.dart';
 

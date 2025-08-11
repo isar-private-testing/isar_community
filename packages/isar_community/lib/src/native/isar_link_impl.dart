@@ -2,7 +2,7 @@
 
 import 'dart:ffi';
 
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 import 'package:isar_community/src/common/isar_link_base_impl.dart';
 import 'package:isar_community/src/common/isar_link_common.dart';
 import 'package:isar_community/src/common/isar_links_common.dart';

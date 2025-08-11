@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 import 'package:isar_community/src/common/isar_link_base_impl.dart';
 
 const bool _kIsWeb = identical(0, 0.0);

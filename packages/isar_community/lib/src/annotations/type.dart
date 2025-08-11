@@ -1,6 +1,6 @@
 // ignore_for_file: camel_case_types
 
-part of isar;
+part of isar_community;
 
 /// Type to specify the id property of a collection.
 typedef Id = int;

@@ -1,4 +1,4 @@
-part of isar;
+part of isar_community;
 
 /// This schema represents a collection.
 class CollectionSchema<OBJ> extends Schema<OBJ> {

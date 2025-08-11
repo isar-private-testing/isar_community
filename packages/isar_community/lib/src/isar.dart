@@ -1,4 +1,4 @@
-part of isar;
+part of isar_community;
 
 /// Callback for a newly opened Isar instance.
 typedef IsarOpenCallback = void Function(Isar isar);

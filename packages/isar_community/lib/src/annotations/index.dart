@@ -1,4 +1,4 @@
-part of isar;
+part of isar_community;
 
 /// Specifies how an index is stored in Isar.
 enum IndexType {

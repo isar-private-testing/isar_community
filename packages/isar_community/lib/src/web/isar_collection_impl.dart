@@ -6,7 +6,7 @@ import 'dart:js';
 import 'dart:js_util';
 import 'dart:typed_data';
 
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 import 'package:isar_community/src/web/bindings.dart';
 import 'package:isar_community/src/web/isar_impl.dart';
 import 'package:isar_community/src/web/isar_reader_impl.dart';

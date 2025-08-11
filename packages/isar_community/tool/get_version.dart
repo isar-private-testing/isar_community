@@ -1,4 +1,4 @@
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 
 void main() {
   // ignore: avoid_print

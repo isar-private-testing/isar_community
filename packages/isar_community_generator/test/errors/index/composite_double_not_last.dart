@@ -1,6 +1,6 @@
 // only the last property of a composite index may be a double value
 
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 
 @collection
 class Model {

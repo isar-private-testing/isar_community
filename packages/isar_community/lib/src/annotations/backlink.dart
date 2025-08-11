@@ -1,4 +1,4 @@
-part of isar;
+part of isar_community;
 
 /// Annotation to create a backlink to an existing link.
 @Target({TargetKind.field})

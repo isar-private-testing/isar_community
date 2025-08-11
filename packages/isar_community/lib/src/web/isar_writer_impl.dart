@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 import 'package:isar_community/src/web/isar_reader_impl.dart';
 import 'package:js/js_util.dart';
 import 'package:meta/dart2js.dart';

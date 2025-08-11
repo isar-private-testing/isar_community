@@ -6,7 +6,7 @@ import 'dart:io';
 import 'dart:isolate';
 
 import 'package:ffi/ffi.dart';
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 import 'package:isar_community/src/native/bindings.dart';
 
 const Id isarMinId = -9223372036854775807;

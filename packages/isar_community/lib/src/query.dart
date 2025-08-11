@@ -1,4 +1,4 @@
-part of isar;
+part of isar_community;
 
 /// Querying is how you find records that match certain conditions.
 abstract class Query<T> {

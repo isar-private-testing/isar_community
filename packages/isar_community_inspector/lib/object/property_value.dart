@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 
 class PropertyValue extends StatelessWidget {
   const PropertyValue(

@@ -1,4 +1,4 @@
-part of isar;
+part of isar_community;
 
 /// Annotation to specify how an enum property should be serialized.
 const enumerated = Enumerated(EnumType.ordinal);

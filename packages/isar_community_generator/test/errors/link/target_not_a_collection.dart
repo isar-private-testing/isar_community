@@ -1,6 +1,6 @@
 // link target is not annotated with @collection
 
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 
 @collection
 class Model {

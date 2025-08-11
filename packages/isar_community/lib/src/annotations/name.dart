@@ -1,4 +1,4 @@
-part of isar;
+part of isar_community;
 
 /// Annotate Isar collections or properties to change their name.
 ///

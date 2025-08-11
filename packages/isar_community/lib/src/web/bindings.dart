@@ -3,7 +3,7 @@
 import 'dart:indexed_db';
 import 'dart:js';
 
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 import 'package:js/js.dart';
 import 'package:js/js_util.dart';
 

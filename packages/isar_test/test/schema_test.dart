@@ -2,7 +2,7 @@
 
 import 'dart:typed_data';
 
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 
 part 'schema_test.g.dart';
 

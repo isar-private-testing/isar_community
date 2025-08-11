@@ -1,4 +1,4 @@
-part of isar;
+part of isar_community;
 
 /// An error raised by Isar.
 class IsarError extends Error {

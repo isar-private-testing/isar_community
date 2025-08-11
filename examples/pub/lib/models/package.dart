@@ -1,4 +1,4 @@
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 import 'package:pub_app/models/api/metrics.dart';
 import 'package:pub_app/models/api/package.dart';
 import 'package:pubspec/pubspec.dart';

@@ -1,4 +1,4 @@
-part of isar;
+part of isar_community;
 
 /// This schema either represents a collection or embedded object.
 class Schema<OBJ> {

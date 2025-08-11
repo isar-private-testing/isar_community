@@ -5,7 +5,7 @@ import 'dart:ffi';
 import 'dart:isolate';
 
 import 'package:ffi/ffi.dart';
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 import 'package:isar_community/src/common/schemas.dart';
 import 'package:isar_community/src/native/bindings.dart';
 import 'package:isar_community/src/native/encode_string.dart';

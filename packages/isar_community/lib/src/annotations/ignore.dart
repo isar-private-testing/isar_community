@@ -1,4 +1,4 @@
-part of isar;
+part of isar_community;
 
 /// Annotate a property or accessor in an Isar collection to ignore it.
 const ignore = Ignore();

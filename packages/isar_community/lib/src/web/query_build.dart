@@ -2,7 +2,7 @@
 
 import 'dart:indexed_db';
 
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 
 import 'package:isar_community/src/web/bindings.dart';
 import 'package:isar_community/src/web/isar_collection_impl.dart';

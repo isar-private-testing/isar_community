@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // ignore_for_file: avoid_print
 
-part of isar;
+part of isar_community;
 
 abstract class _IsarConnect {
   static const Map<ConnectAction,

@@ -2,7 +2,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:dartx/dartx.dart';
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 
 import 'package:isar_community_generator/src/helper.dart';
 import 'package:isar_community_generator/src/isar_type.dart';

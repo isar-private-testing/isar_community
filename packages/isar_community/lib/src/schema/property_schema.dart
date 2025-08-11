@@ -1,4 +1,4 @@
-part of isar;
+part of isar_community;
 
 /// A single propery of a collection or embedded object.
 class PropertySchema {

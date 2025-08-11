@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'dart:js';
 import 'dart:typed_data';
 
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 import 'package:isar_community/src/web/bindings.dart';
 
 import 'package:isar_community/src/web/isar_collection_impl.dart';

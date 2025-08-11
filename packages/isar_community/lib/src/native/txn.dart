@@ -3,7 +3,7 @@ import 'dart:collection';
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:isar_community/isar.dart';
+import 'package:isar_community/isar_community.dart';
 import 'package:isar_community/src/common/isar_common.dart';
 import 'package:isar_community/src/native/bindings.dart';
 import 'package:isar_community/src/native/isar_core.dart';
