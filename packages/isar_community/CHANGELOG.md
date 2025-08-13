@@ -1,3 +1,9 @@
+## 3.2.0-dev.2
+
+### Fixes
+
+- Fixed iOS targeting
+
 ## 3.2.0-dev.1
 
 ### Features  
