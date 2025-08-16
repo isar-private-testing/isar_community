@@ -26,7 +26,8 @@ class IsarWeb extends Isar {
   }
 
   @override
-  Future<T> writeTxn<T>(Future<T> Function() callback, {bool silent = false}) async {
+  Future<T> writeTxn<T>(Future<T> Function() callback,
+      {bool silent = false}) async {
     throw UnsupportedError('Isar web support is not available');
   }
 
@@ -41,7 +42,8 @@ class IsarWeb extends Isar {
   }
 
   @override
-  Future<int> getSize({bool includeIndexes = false, bool includeLinks = false}) async {
+  Future<int> getSize(
+      {bool includeIndexes = false, bool includeLinks = false}) async {
     throw UnsupportedError('Isar web support is not available');
   }
 
@@ -85,7 +87,7 @@ Isar openIsarSync({
   throw UnsupportedError('Isar web support is not available');
 }
 
-/// Web stub for core binary  
+/// Web stub for core binary
 Future<void> initializeCoreBinary({
   Map<IsarAbi, String> libraries = const {},
   bool download = false,
