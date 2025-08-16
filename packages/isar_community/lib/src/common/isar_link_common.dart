@@ -1,7 +1,6 @@
 import 'package:isar_community/isar.dart';
 import 'package:isar_community/src/common/isar_link_base_impl.dart';
 
-
 /// @nodoc
 abstract class IsarLinkCommon<OBJ> extends IsarLinkBaseImpl<OBJ>
     with IsarLink<OBJ> {

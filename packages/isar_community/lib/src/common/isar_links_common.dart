@@ -3,7 +3,6 @@ import 'dart:collection';
 import 'package:isar_community/isar.dart';
 import 'package:isar_community/src/common/isar_link_base_impl.dart';
 
-
 /// @nodoc
 abstract class IsarLinksCommon<OBJ> extends IsarLinkBaseImpl<OBJ>
     with IsarLinks<OBJ>, SetMixin<OBJ> {
