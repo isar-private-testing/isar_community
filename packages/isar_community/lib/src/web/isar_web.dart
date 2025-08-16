@@ -15,7 +15,7 @@ typedef IsarAbi = String;
 
 /// Web stub for Isar - inspector compilation only
 class IsarWeb extends Isar {
-  IsarWeb._(String name) : super(name);
+  IsarWeb._(super.name);
 
   @override
   String? get directory => null;
@@ -26,8 +26,10 @@ class IsarWeb extends Isar {
   }
 
   @override
-  Future<T> writeTxn<T>(Future<T> Function() callback,
-      {bool silent = false}) async {
+  Future<T> writeTxn<T>(
+    Future<T> Function() callback, {
+    bool silent = false,
+  }) async {
     throw UnsupportedError('Isar web support is not available');
   }
 
@@ -42,8 +44,10 @@ class IsarWeb extends Isar {
   }
 
   @override
-  Future<int> getSize(
-      {bool includeIndexes = false, bool includeLinks = false}) async {
+  Future<int> getSize({
+    bool includeIndexes = false,
+    bool includeLinks = false,
+  }) async {
     throw UnsupportedError('Isar web support is not available');
   }
 
