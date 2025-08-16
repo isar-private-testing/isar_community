@@ -98,7 +98,7 @@ abstract class Isar {
 
     /// Tree shake the inspector for profile and release builds.
     assert(() {
-      if (!_kIsWeb && inspector) {
+      if (inspector) {
         _IsarConnect.initialize(schemas);
       }
       return true;
@@ -128,7 +128,7 @@ abstract class Isar {
 
     /// Tree shake the inspector for profile and release builds.
     assert(() {
-      if (!_kIsWeb && inspector) {
+      if (inspector) {
         _IsarConnect.initialize(schemas);
       }
       return true;

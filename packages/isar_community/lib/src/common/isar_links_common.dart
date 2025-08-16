@@ -3,7 +3,6 @@ import 'dart:collection';
 import 'package:isar_community/isar.dart';
 import 'package:isar_community/src/common/isar_link_base_impl.dart';
 
-const bool _kIsWeb = identical(0, 0.0);
 
 /// @nodoc
 abstract class IsarLinksCommon<OBJ> extends IsarLinkBaseImpl<OBJ>
@@ -23,7 +22,7 @@ abstract class IsarLinksCommon<OBJ> extends IsarLinkBaseImpl<OBJ>
   bool get isChanged => addedObjects.isNotEmpty || removedObjects.isNotEmpty;
 
   Map<Id, OBJ> get _loadedObjects {
-    if (isAttached && !isLoaded && !_kIsWeb) {
+    if (isAttached && !isLoaded) {
       loadSync();
     }
     return _objects;
